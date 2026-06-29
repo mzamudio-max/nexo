@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>nexo — El puente entre quien eres y quien necesitas ser</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat@0.31.0/dist/style.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
   :root {
@@ -34,9 +34,8 @@
     --chat--message--user--background: #6B4FBB;
     --chat--message--user--color: #F5F3FF;
     --chat--window--background: #1a1625;
-    --chat--input--text-color: #F5F3FF;
-    --chat--input--background: #3D3560;
-    --chat--input--border-color: rgba(196, 184, 232, 0.4);
+    --chat--input--background: #2D2540;
+    --chat--input--placeholder--color: #9B92B8;
     --chat--toggle--background: #6B4FBB;
     --chat--toggle--hover--background: #8B6FD4;
     --chat--toggle--color: #F5F3FF;
@@ -189,38 +188,18 @@
 </div>
 
 <footer>
-  <div><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:62px;opacity:0.8;"></div>
+  <div><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:40px;opacity:0.8;"></div>
   <p>MIB AIEx · Equipo 3 · Junio 2026</p>
   <p>Diagnóstico IA · Reskilling personalizado · Acompañamiento semanal</p>
 </footer>
 
-<script type="module">
-  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@0.31.0/dist/chat.bundle.es.js';
-
-  const chat = createChat({
-    webhookUrl: 'https://equipo3aiexisdi.app.n8n.cloud/webhook/2f3f7d77-08f8-4090-a81a-3f352d14c846/chat',
-    mode: 'window',
-    showWelcomeScreen: false,
-    chatInputKey: 'chatInput',
-    chatSessionKey: 'sessionId',
-    metadata: {},
-    initialMessages: [
-      'Hola, soy RÍO 👋 Te ayudo a entender cómo te afecta la IA en tu trabajo — sin alarmas, con un plan concreto. ¿A qué te dedicas y qué tareas ocupan la mayor parte de tu día?'
-    ],
-    i18n: {
-      en: {
-        title: 'RÍO · Diagnóstico de riesgo',
-        subtitle: 'Nexo — Orientación laboral IA',
-        inputPlaceholder: 'Escribe tu mensaje...',
-        getStarted: 'Iniciar diagnóstico',
-        closeButtonTooltip: 'Cerrar',
-      },
-    },
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    function goToChat() { window.location.href = 'chat.html'; }
+    document.getElementById('btn-hero').addEventListener('click', goToChat);
+    document.getElementById('btn-final').addEventListener('click', goToChat);
+    document.getElementById('btn-nav').addEventListener('click', function(e) { e.preventDefault(); goToChat(); });
   });
-
-  document.getElementById('btn-hero').addEventListener('click', () => chat.open());
-  document.getElementById('btn-final').addEventListener('click', () => chat.open());
-  document.getElementById('btn-nav').addEventListener('click', (e) => { e.preventDefault(); chat.open(); });
 </script>
 
 </body>
