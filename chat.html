@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RÍO · Diagnóstico de riesgo — Nexo</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat@0.31.0/dist/style.css" />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+  :root {
+    --nexo-night: #1a1625;
+    --nexo-violet: #6B4FBB;
+    --nexo-violet-light: #8B6FD4;
+    --nexo-lavender: #C4B8E8;
+    --nexo-soft: #2D2540;
+    --nexo-near-white: #F5F3FF;
+    --nexo-text: #E8E4F5;
+    --nexo-muted: #9B92B8;
+
+    --chat--color-primary: #6B4FBB;
+    --chat--color-primary-shade-50: #5a3fa8;
+    --chat--color-primary-shade-100: #4a3090;
+    --chat--color-secondary: #2D2540;
+    --chat--color-secondary-shade-50: #1a1625;
+    --chat--color-white: #F5F3FF;
+    --chat--color-light: #2D2540;
+    --chat--color-light-shade-50: #1a1625;
+    --chat--color-light-shade-100: #1a1625;
+    --chat--color-medium: #9B92B8;
+    --chat--color-dark: #E8E4F5;
+    --chat--color-disabled: #9B92B8;
+    --chat--color-typing: #C4B8E8;
+    --chat--header--background: #2D2540;
+    --chat--header--color: #F5F3FF;
+    --chat--message--bot--background: #2D2540;
+    --chat--message--bot--color: #E8E4F5;
+    --chat--message--user--background: #6B4FBB;
+    --chat--message--user--color: #F5F3FF;
+    --chat--window--background: #1a1625;
+    --chat--input--background: #3D3560;
+    --chat--input--text-color: #F5F3FF;
+    --chat--input--placeholder--color: #9B92B8;
+    --chat--input--border-color: rgba(196, 184, 232, 0.4);
+    --chat--border-radius: 12px;
+    --chat--textarea--height: 50px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--nexo-night);
+    color: var(--nexo-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 0.5px solid rgba(196, 184, 232, 0.15);
+    background: var(--nexo-soft);
+  }
+
+  .header-logo img { height: 48px; }
+
+  .header-info {
+    text-align: center;
+  }
+
+  .header-agent {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--nexo-near-white);
+  }
+
+  .header-desc {
+    font-size: 0.75rem;
+    color: var(--nexo-violet-light);
+    margin-top: 2px;
+  }
+
+  .btn-back {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--nexo-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    border: 0.5px solid rgba(196, 184, 232, 0.2);
+    border-radius: 6px;
+    transition: all 0.2s;
+    background: transparent;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .btn-back:hover {
+    color: var(--nexo-lavender);
+    border-color: rgba(196, 184, 232, 0.4);
+  }
+
+  .chat-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    max-width: 780px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .chat-intro {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .agent-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(107, 79, 187, 0.15);
+    border: 0.5px solid rgba(107, 79, 187, 0.4);
+    color: var(--nexo-lavender);
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    margin-bottom: 1rem;
+  }
+
+  .agent-dot {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+  }
+
+  .chat-intro h1 {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--nexo-near-white);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .chat-intro p {
+    font-size: 0.9rem;
+    color: var(--nexo-muted);
+  }
+
+  #n8n-chat-container {
+    flex: 1;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 0.5px solid rgba(196, 184, 232, 0.15);
+    min-height: 520px;
+  }
+
+  #n8n-chat-container .n8n-chat {
+    height: 100%;
+  }
+
+  .n8n-chat__messages-list {
+    background: var(--nexo-night) !important;
+  }
+
+  .n8n-chat__input {
+    background: #3D3560 !important;
+    color: #F5F3FF !important;
+    border: 0.5px solid rgba(196, 184, 232, 0.4) !important;
+  }
+
+  .n8n-chat__input textarea,
+  .n8n-chat__input input {
+    background: #3D3560 !important;
+    color: #F5F3FF !important;
+  }
+
+  .n8n-chat__input textarea::placeholder {
+    color: #9B92B8 !important;
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: 0.75rem;
+    color: var(--nexo-muted);
+    border-top: 0.5px solid rgba(196, 184, 232, 0.1);
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="btn-back">← Volver a Nexo</a>
+  <div class="header-info">
+    <div class="header-agent">RÍO · Diagnóstico de riesgo</div>
+    <div class="header-desc">Nexo — Sistema de orientación laboral IA</div>
+  </div>
+  <div class="header-logo">
+    <img src="nexo_logo_transparente_blanco.png" alt="nexo">
+  </div>
+</header>
+
+<div class="chat-wrapper">
+  <div class="chat-intro">
+    <div class="agent-badge">
+      <div class="agent-dot"></div>
+      RÍO está activo
+    </div>
+    <h1>Tu diagnóstico de riesgo laboral</h1>
+    <p>Una conversación. Un plan concreto. Sin alarmismo.</p>
+  </div>
+
+  <div id="n8n-chat-container"></div>
+</div>
+
+<footer>
+  Diagnóstico basado en Eloundou et al. (Science, 2024) · ESCO v1.2 · WEF Future of Jobs 2025
+</footer>
+
+<script type="module">
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@0.31.0/dist/chat.bundle.es.js';
+
+  createChat({
+    webhookUrl: 'https://equipo3aiexisdi.app.n8n.cloud/webhook/2f3f7d77-08f8-4090-a81a-3f352d14c846/chat',
+    mode: 'fullscreen',
+    target: '#n8n-chat-container',
+    showWelcomeScreen: false,
+    chatInputKey: 'chatInput',
+    chatSessionKey: 'sessionId',
+    metadata: {},
+    initialMessages: [
+      'Hola, soy RÍO 👋 Te ayudo a entender cómo te afecta la IA en tu trabajo — sin alarmas, con un plan concreto. ¿A qué te dedicas y qué tareas ocupan la mayor parte de tu día?'
+    ],
+    i18n: {
+      en: {
+        title: 'RÍO',
+        subtitle: 'Diagnóstico de riesgo · Nexo',
+        inputPlaceholder: 'Escribe tu respuesta aquí...',
+        getStarted: 'Iniciar diagnóstico',
+        closeButtonTooltip: 'Cerrar',
+      },
+    },
+  });
+</script>
+
+</body>
+</html>
