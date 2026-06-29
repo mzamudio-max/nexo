@@ -224,17 +224,15 @@
   Diagnóstico basado en Eloundou et al. (Science, 2024) · ESCO v1.2 · WEF Future of Jobs 2025
 </footer>
 
+<link href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" rel="stylesheet" />
 <script type="module">
-  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat@0.31.0/dist/chat.bundle.es.js';
+  import { createChat } from 'https://cdn.jsdelivr.net/npm/@n8n/chat/dist/chat.bundle.es.js';
 
   createChat({
     webhookUrl: 'https://equipo3aiexisdi.app.n8n.cloud/webhook/2f3f7d77-08f8-4090-a81a-3f352d14c846/chat',
     mode: 'fullscreen',
     target: '#n8n-chat-container',
     showWelcomeScreen: false,
-    chatInputKey: 'chatInput',
-    chatSessionKey: 'sessionId',
-    metadata: {},
     initialMessages: [
       'Hola, soy RÍO 👋 Te ayudo a entender cómo te afecta la IA en tu trabajo — sin alarmas, con un plan concreto. ¿A qué te dedicas y qué tareas ocupan la mayor parte de tu día?'
     ],
@@ -243,8 +241,6 @@
         title: 'RÍO',
         subtitle: 'Diagnóstico de riesgo · Nexo',
         inputPlaceholder: 'Escribe tu respuesta aquí...',
-        getStarted: 'Iniciar diagnóstico',
-        closeButtonTooltip: 'Cerrar',
       },
     },
   });
