@@ -453,6 +453,7 @@
 
 <script>
   const N8N_CHAT_WEBHOOK = 'https://equipo3aiexisdi.app.n8n.cloud/webhook/2f3f7d77-08f8-4090-a81a-3f352d14c846/chat';
+  const N8N_CHAT_URL = `${N8N_CHAT_WEBHOOK}?action=sendMessage`; // n8n Chat Trigger espera action como query param
 
   const overlay = document.getElementById('nexo-modal-overlay');
   const messagesEl = document.getElementById('nexo-chat-messages');
@@ -498,21 +499,67 @@
     return msg;
   }
 
+  function safeParseN8NResponse(rawText) {
+    if (!rawText) return {};
+
+    // Caso normal: n8n devuelve un único JSON válido
+    try {
+      return JSON.parse(rawText);
+    } catch (_) {
+      // Caso frecuente en Chat Trigger: devuelve varias líneas JSON/SSE
+      const lines = rawText
+        .split(/\r?\n/)
+        .map(line => line.trim())
+        .filter(Boolean)
+        .map(line => line.startsWith('data:') ? line.slice(5).trim() : line);
+
+      const parsed = [];
+      for (const line of lines) {
+        if (line === '[DONE]') continue;
+        try {
+          parsed.push(JSON.parse(line));
+        } catch (_) {
+          // Si una línea no es JSON, la conservamos como texto
+          parsed.push(line);
+        }
+      }
+
+      return parsed.length ? parsed : rawText;
+    }
+  }
+
   function extractBotReply(data) {
-    if (typeof data === 'string') return data;
     if (!data) return '';
-    if (Array.isArray(data)) return extractBotReply(data[0]);
+    if (typeof data === 'string') return data;
+
+    // Si n8n devuelve una secuencia de eventos, tomamos el último texto útil
+    if (Array.isArray(data)) {
+      const replies = data
+        .map(item => extractBotReply(item))
+        .filter(Boolean);
+      return replies[replies.length - 1] || '';
+    }
+
+    if (typeof data.output === 'object') return extractBotReply(data.output);
+    if (typeof data.response === 'object') return extractBotReply(data.response);
+    if (typeof data.message === 'object') return extractBotReply(data.message);
 
     return data.output
       || data.reply
       || data.response
       || data.text
+      || data.content
       || data.message
       || data.answer
       || data.chatOutput
+      || data.result?.output
+      || data.result?.text
+      || data.result?.content
       || data.data?.output
       || data.data?.reply
       || data.data?.message
+      || data.data?.text
+      || data.choices?.[0]?.message?.content
       || '';
   }
 
@@ -524,18 +571,22 @@
       message: userMessage
     };
 
-    const response = await fetch(N8N_CHAT_WEBHOOK, {
+    console.log('Enviando a n8n:', payload);
+
+    const response = await fetch(N8N_CHAT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
+    const rawText = await response.text();
+    console.log('Respuesta cruda de n8n:', response.status, rawText);
+
     if (!response.ok) {
-      throw new Error(`Error ${response.status}: ${response.statusText}`);
+      throw new Error(`Error ${response.status}: ${response.statusText} — ${rawText}`);
     }
 
-    const contentType = response.headers.get('content-type') || '';
-    return contentType.includes('application/json') ? response.json() : response.text();
+    return safeParseN8NResponse(rawText);
   }
 
   formEl.addEventListener('submit', async (e) => {
