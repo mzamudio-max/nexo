@@ -153,6 +153,32 @@
   .nexo-chat-input button:hover { background: var(--nexo-violet-light); }
   .nexo-chat-input button:disabled { opacity: 0.55; cursor: not-allowed; }
   .nexo-chat-note { padding: 0.75rem 1rem 0; font-size: 0.75rem; color: rgba(155,146,184,0.7); }
+
+  /* DIAGNÓSTICO VISUAL EN CHAT */
+  .nexo-diagnosis-card { align-self: stretch; max-width: 100%; background: linear-gradient(160deg, rgba(107,79,187,0.22), rgba(45,37,64,0.95)); border: 0.5px solid rgba(196,184,232,0.22); border-radius: 18px; overflow: hidden; color: var(--nexo-text); box-shadow: 0 18px 48px rgba(0,0,0,0.22); }
+  .nexo-diagnosis-head { padding: 1.25rem; background: rgba(26,22,37,0.72); border-bottom: 0.5px solid rgba(196,184,232,0.12); }
+  .nexo-diagnosis-kicker { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--nexo-lavender); margin-bottom: 0.45rem; font-weight: 600; }
+  .nexo-diagnosis-title { font-size: 1.1rem; font-weight: 600; color: var(--nexo-near-white); }
+  .nexo-score-row { display: flex; gap: 1rem; align-items: center; padding: 1.25rem; }
+  .nexo-score-circle { width: 112px; height: 112px; border-radius: 999px; border: 8px solid rgba(196,184,232,0.18); display: flex; flex-direction: column; justify-content: center; align-items: center; background: rgba(26,22,37,0.5); flex-shrink: 0; }
+  .nexo-score-num { font-size: 2.15rem; line-height: 1; font-weight: 600; color: var(--nexo-near-white); letter-spacing: -0.05em; }
+  .nexo-score-den { font-size: 0.75rem; color: var(--nexo-muted); margin-top: 0.2rem; }
+  .nexo-score-meta { flex: 1; min-width: 0; }
+  .nexo-score-level { font-size: 1rem; font-weight: 600; color: var(--nexo-near-white); margin-bottom: 0.35rem; }
+  .nexo-score-job { font-size: 0.82rem; color: var(--nexo-muted); line-height: 1.5; }
+  .nexo-bar { height: 8px; border-radius: 999px; background: rgba(196,184,232,0.14); margin-top: 0.85rem; overflow: hidden; }
+  .nexo-bar-fill { height: 100%; width: 0; border-radius: 999px; background: linear-gradient(90deg, #8B6FD4, #FACC15, #FB923C); }
+  .nexo-diagnosis-section { padding: 1rem 1.25rem; border-top: 0.5px solid rgba(196,184,232,0.10); }
+  .nexo-diagnosis-label { font-size: 0.7rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--nexo-violet-light); font-weight: 600; margin-bottom: 0.55rem; }
+  .nexo-diagnosis-text { font-size: 0.84rem; color: var(--nexo-text); line-height: 1.65; white-space: pre-wrap; }
+  .nexo-diagnosis-grid { display: grid; grid-template-columns: 1fr; gap: 0.75rem; }
+  .nexo-mini-card { background: rgba(26,22,37,0.45); border: 0.5px solid rgba(196,184,232,0.12); border-radius: 12px; padding: 0.85rem; }
+  .nexo-email-note { margin: 0 1.25rem 1.25rem; padding: 0.8rem 0.95rem; border-radius: 12px; background: rgba(74,222,128,0.10); border: 0.5px solid rgba(74,222,128,0.22); color: #c8f8d8; font-size: 0.82rem; line-height: 1.5; }
+  @media (max-width: 640px) {
+    .nexo-score-row { flex-direction: column; align-items: flex-start; }
+    .nexo-score-circle { width: 96px; height: 96px; }
+  }
+
 </style>
 </head>
 <body>
@@ -490,7 +516,88 @@
     document.body.style.overflow = '';
   }
 
+
+  function escapeHTML(value) {
+    return String(value || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  function isDiagnosis(text) {
+    return /DIAGN[ÓO]STICO NEXO/i.test(text || '') && /Score de riesgo/i.test(text || '');
+  }
+
+  function extractSection(text, startLabel, endLabel) {
+    const source = text || '';
+    const start = source.search(new RegExp(startLabel, 'i'));
+    if (start < 0) return '';
+    const sliced = source.slice(start).replace(new RegExp('^.*?' + startLabel, 'i'), '').trim();
+    if (!endLabel) return sliced.trim();
+    const end = sliced.search(new RegExp(endLabel, 'i'));
+    return (end >= 0 ? sliced.slice(0, end) : sliced).trim();
+  }
+
+  function buildDiagnosisCard(text) {
+    const ocupacion = (text.match(/Ocupación:\s*([^\n]+)/i)?.[1] || 'Tu perfil').trim();
+    const score = (text.match(/Score de riesgo:\s*(\d+)/i)?.[1] || '0').trim();
+    const nivel = (text.match(/Score de riesgo:\s*\d+\/100\s*[—-]\s*([^\n]+)/i)?.[1] || 'Diagnóstico orientativo').trim();
+    const mapa = extractSection(text, 'MAPA DE HABILIDADES', 'TU PLAN DE RESKILLING');
+    const plan = extractSection(text, 'TU PLAN DE RESKILLING[\\s\\S]*?\\)', 'PRIMER PASO ESTA SEMANA');
+    const primerPaso = extractSection(text, 'PRIMER PASO ESTA SEMANA', 'Este diagnóstico');
+    const scoreNum = Math.max(0, Math.min(100, Number(score) || 0));
+
+    return `
+      <div class="nexo-diagnosis-head">
+        <div class="nexo-diagnosis-kicker">Diagnóstico Nexo — RÍO</div>
+        <div class="nexo-diagnosis-title">Tu resultado está listo</div>
+      </div>
+      <div class="nexo-score-row">
+        <div class="nexo-score-circle">
+          <div class="nexo-score-num">${escapeHTML(score)}</div>
+          <div class="nexo-score-den">/100</div>
+        </div>
+        <div class="nexo-score-meta">
+          <div class="nexo-score-level">${escapeHTML(nivel)}</div>
+          <div class="nexo-score-job">Ocupación: ${escapeHTML(ocupacion)}</div>
+          <div class="nexo-bar"><div class="nexo-bar-fill" style="width:${scoreNum}%"></div></div>
+        </div>
+      </div>
+      <div class="nexo-diagnosis-grid">
+        <div class="nexo-diagnosis-section">
+          <div class="nexo-diagnosis-label">Mapa de habilidades</div>
+          <div class="nexo-diagnosis-text">${escapeHTML(mapa)}</div>
+        </div>
+        <div class="nexo-diagnosis-section">
+          <div class="nexo-diagnosis-label">Tu plan de reskilling</div>
+          <div class="nexo-diagnosis-text">${escapeHTML(plan)}</div>
+        </div>
+        <div class="nexo-diagnosis-section">
+          <div class="nexo-diagnosis-label">Primer paso esta semana</div>
+          <div class="nexo-mini-card"><div class="nexo-diagnosis-text">${escapeHTML(primerPaso)}</div></div>
+        </div>
+      </div>
+      <div class="nexo-email-note">Te enviamos una copia completa de este diagnóstico al correo que nos indicaste.</div>
+    `;
+  }
+
+  function addDiagnosisCard(text) {
+    const card = document.createElement('div');
+    card.className = 'nexo-diagnosis-card';
+    card.innerHTML = buildDiagnosisCard(text);
+    messagesEl.appendChild(card);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return card;
+  }
+
+
   function addMessage(type, text, extraClass = '') {
+    if (type === 'bot' && isDiagnosis(text)) {
+      return addDiagnosisCard(text);
+    }
+
     const msg = document.createElement('div');
     msg.className = `nexo-message ${type} ${extraClass}`.trim();
     msg.textContent = text;
