@@ -696,10 +696,13 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
 
     if (Array.isArray(data)) {
       // 1) Prioridad: un output explícito del último nodo Edit Fields.
-      const explicitOutputs = data
-        .map(item => item?.output || item?.json?.output || item?.data?.output || item?.result?.output || '')
-        .filter(Boolean);
-      if (explicitOutputs.length) return explicitOutputs[explicitOutputs.length - 1];
+    const explicitOutputs = data
+  .map(item => item?.output || item?.json?.output || item?.data?.output || item?.result?.output || '')
+  .filter(Boolean);
+
+if (explicitOutputs.length) {
+  return FINAL_DIAGNOSIS_MESSAGE;
+}
 
       // 2) n8n streaming: reconstruir la respuesta con todos los content de type=item.
       const streamingText = data
