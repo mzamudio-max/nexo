@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>nexo — El puente entre quien eres y quien necesitas ser</title>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@n8n/chat/dist/style.css" />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
   :root {
@@ -16,90 +15,160 @@
     --nexo-near-white: #F5F3FF;
     --nexo-text: #E8E4F5;
     --nexo-muted: #9B92B8;
-    --chat--color-primary: #6B4FBB;
-    --chat--color-primary-shade-50: #5a3fa8;
-    --chat--color-primary-shade-100: #4a3090;
-    --chat--color-secondary: #2D2540;
-    --chat--color-secondary-shade-50: #1a1625;
-    --chat--color-white: #F5F3FF;
-    --chat--color-light: #2D2540;
-    --chat--color-light-shade-50: #1a1625;
-    --chat--color-light-shade-100: #1a1625;
-    --chat--color-medium: #9B92B8;
-    --chat--color-dark: #E8E4F5;
-    --chat--header--background: #2D2540;
-    --chat--header--color: #F5F3FF;
-    --chat--message--bot--background: #2D2540;
-    --chat--message--bot--color: #E8E4F5;
-    --chat--message--user--background: #6B4FBB;
-    --chat--message--user--color: #F5F3FF;
-    --chat--window--background: #1a1625;
-    --chat--input--background: #2D2540;
-    --chat--input--placeholder--color: #9B92B8;
-    --chat--toggle--background: #6B4FBB;
-    --chat--toggle--hover--background: #8B6FD4;
-    --chat--toggle--color: #F5F3FF;
-    --chat--toggle--size: 64px;
-    --chat--border-radius: 12px;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: var(--nexo-night); color: var(--nexo-text); line-height: 1.6; }
-  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; border-bottom: 0.5px solid rgba(196,184,232,0.15); }
-  nav ul { display: flex; list-style: none; gap: 2.5rem; }
+
+  /* NAV */
+  nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; border-bottom: 0.5px solid rgba(196,184,232,0.15); position: sticky; top: 0; background: var(--nexo-night); z-index: 100; }
+  nav ul { display: flex; list-style: none; gap: 2.5rem; align-items: center; }
   nav ul li a { color: var(--nexo-muted); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
   nav ul li a:hover { color: var(--nexo-lavender); }
   .nav-cta { background: var(--nexo-violet) !important; color: var(--nexo-near-white) !important; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 500 !important; }
+
+  /* SHARED */
+  .section-label { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--nexo-violet-light); text-transform: uppercase; margin-bottom: 1rem; }
+  .section-title { font-size: 2rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.02em; margin-bottom: 0.75rem; }
+  .section-sub { color: var(--nexo-muted); font-size: 0.95rem; margin-bottom: 3rem; max-width: 480px; line-height: 1.6; }
+  .btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--nexo-violet); color: white; padding: 0.9rem 2rem; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; border: none; transition: background 0.2s; font-family: 'Inter', sans-serif; }
+  .btn-cta:hover { background: var(--nexo-violet-light); }
+
+  /* HERO */
+  .hero-wrapper { position: relative; overflow: hidden; }
+  .circles-bg { position: absolute; top:0;left:0;right:0;bottom:0; overflow:hidden; pointer-events:none; z-index:0; }
+  .circle { position: absolute; border-radius: 50%; border: 0.5px solid rgba(107,79,187,0.15); }
   .hero { padding: 7rem 4rem 5rem; max-width: 900px; margin: 0 auto; text-align: center; position: relative; z-index: 1; }
   .hero-tag { display: inline-block; background: rgba(107,79,187,0.2); border: 0.5px solid rgba(107,79,187,0.5); color: var(--nexo-lavender); font-size: 0.8rem; padding: 0.35rem 1rem; border-radius: 100px; margin-bottom: 2rem; letter-spacing: 0.04em; }
   .hero h1 { font-size: 3.5rem; font-weight: 300; line-height: 1.15; letter-spacing: -0.03em; color: var(--nexo-near-white); margin-bottom: 1.5rem; }
   .hero h1 em { font-style: normal; color: var(--nexo-violet-light); }
   .hero p { font-size: 1.1rem; color: var(--nexo-muted); max-width: 560px; margin: 0 auto 2.5rem; font-weight: 300; }
-  .btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--nexo-violet); color: white; padding: 0.9rem 2rem; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; border: none; transition: background 0.2s; font-family: 'Inter', sans-serif; }
-  .btn-cta:hover { background: var(--nexo-violet-light); }
   .hero-sub { display: block; margin-top: 1rem; font-size: 0.8rem; color: var(--nexo-muted); }
+
+  /* STATS */
   .stats { display: flex; justify-content: center; gap: 5rem; padding: 3rem 4rem; border-top: 0.5px solid rgba(196,184,232,0.1); border-bottom: 0.5px solid rgba(196,184,232,0.1); margin: 0 4rem; }
   .stat-number { font-size: 2.2rem; font-weight: 500; color: var(--nexo-near-white); letter-spacing: -0.03em; }
   .stat-label { font-size: 0.8rem; color: var(--nexo-muted); margin-top: 0.25rem; max-width: 160px; line-height: 1.4; }
-  .agents-section { padding: 6rem 4rem; max-width: 1100px; margin: 0 auto; }
-  .section-label { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--nexo-violet-light); text-transform: uppercase; margin-bottom: 1rem; }
-  .section-title { font-size: 2rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.02em; margin-bottom: 0.75rem; }
-  .section-sub { color: var(--nexo-muted); font-size: 0.95rem; margin-bottom: 3rem; max-width: 480px; }
-  .agents-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
-  .agent-card { background: var(--nexo-soft); border: 0.5px solid rgba(196,184,232,0.12); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s; }
-  .agent-card:hover { border-color: rgba(107,79,187,0.4); }
-  .agent-card.rio { border-top: 2px solid var(--nexo-violet); }
-  .agent-name { font-size: 1.1rem; font-weight: 600; color: var(--nexo-near-white); margin-bottom: 0.25rem; letter-spacing: 0.05em; }
-  .agent-role { font-size: 0.75rem; color: var(--nexo-violet-light); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
-  .agent-quote { font-size: 0.85rem; color: var(--nexo-muted); line-height: 1.6; font-style: italic; border-left: 2px solid rgba(107,79,187,0.3); padding-left: 0.75rem; }
-  .how-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); }
-  .how-inner { max-width: 1100px; margin: 0 auto; }
-  .steps { display: grid; grid-template-columns: repeat(3,1fr); gap: 2rem; margin-top: 3rem; }
-  .step { padding: 2rem; border: 0.5px solid rgba(196,184,232,0.12); border-radius: 12px; background: var(--nexo-night); }
-  .step-num { font-size: 2rem; font-weight: 600; color: rgba(107,79,187,0.3); margin-bottom: 1rem; }
-  .step-title { font-size: 1rem; font-weight: 500; color: var(--nexo-near-white); margin-bottom: 0.5rem; }
-  .step-desc { font-size: 0.85rem; color: var(--nexo-muted); line-height: 1.6; }
+
+  /* PROCESO */
+  .process-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); border-bottom: 0.5px solid rgba(196,184,232,0.1); }
+  .process-inner { max-width: 1100px; margin: 0 auto; }
+  .process-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+  .process-card { background: var(--nexo-night); border: 0.5px solid rgba(196,184,232,0.12); border-radius: 12px; padding: 1.5rem; transition: border-color 0.2s; }
+  .process-card:hover { border-color: rgba(107,79,187,0.4); }
+  .process-card.first { border-top: 2px solid var(--nexo-violet); }
+  .process-num { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nexo-violet-light); margin-bottom: 0.75rem; }
+  .process-name { font-size: 1rem; font-weight: 600; color: var(--nexo-near-white); margin-bottom: 0.25rem; }
+  .process-role { font-size: 0.75rem; color: var(--nexo-violet-light); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 1rem; }
+  .process-desc { font-size: 0.85rem; color: var(--nexo-muted); line-height: 1.6; border-left: 2px solid rgba(107,79,187,0.3); padding-left: 0.75rem; }
+  .process-cta { text-align: center; margin-top: 3rem; }
+  .process-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
+
+  /* DIAGNÓSTICO — qué evaluamos */
+  .diag-section { padding: 6rem 4rem; }
+  .diag-inner { max-width: 1100px; margin: 0 auto; }
+  .eval-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.25rem; margin-top: 0; }
+  .eval-card { background: var(--nexo-soft); border: 0.5px solid rgba(196,184,232,0.12); border-radius: 14px; padding: 2rem; transition: border-color 0.2s; }
+  .eval-card:hover { border-color: rgba(107,79,187,0.35); }
+  .eval-card.primary { border-left: 2px solid var(--nexo-violet); }
+  .eval-icon { font-size: 1.4rem; margin-bottom: 0.75rem; }
+  .eval-title { font-size: 1rem; font-weight: 500; color: var(--nexo-near-white); margin-bottom: 0.4rem; }
+  .eval-desc { font-size: 0.83rem; color: var(--nexo-muted); line-height: 1.7; }
+  .eval-detail { font-size: 0.75rem; color: rgba(155,146,184,0.55); margin-top: 0.6rem; font-style: italic; }
+
+  /* NIVELES */
+  .levels-section { padding: 5rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); }
+  .levels-inner { max-width: 1100px; margin: 0 auto; }
+  .levels-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; margin-top: 2.5rem; }
+  .level-card { background: var(--nexo-night); border-radius: 12px; padding: 1.5rem; border-top: 3px solid; }
+  .level-card.low { border-color: #4ade80; }
+  .level-card.med { border-color: #facc15; }
+  .level-card.high { border-color: #fb923c; }
+  .level-card.urgent { border-color: #f87171; }
+  .level-range { font-size: 1.6rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.03em; margin-bottom: 0.25rem; }
+  .level-label { font-size: 0.8rem; font-weight: 500; color: var(--nexo-near-white); margin-bottom: 0.5rem; }
+  .level-desc { font-size: 0.78rem; color: var(--nexo-muted); line-height: 1.5; }
+  .levels-cta { text-align: center; margin-top: 3rem; }
+  .levels-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
+
+  /* PROFESIONES */
+  .professions-section { padding: 5rem 4rem; border-top: 0.5px solid rgba(196,184,232,0.1); }
+  .professions-inner { max-width: 1100px; margin: 0 auto; }
+  .professions-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 2rem; margin-bottom: 1.5rem; }
+  .prof-tag { font-size: 0.78rem; color: var(--nexo-muted); background: rgba(196,184,232,0.06); border: 0.5px solid rgba(196,184,232,0.12); padding: 0.4rem 0.9rem; border-radius: 100px; }
+  .prof-tag.high { border-color: rgba(107,79,187,0.3); color: var(--nexo-lavender); }
+  .professions-note { font-size: 0.78rem; color: rgba(155,146,184,0.5); margin-bottom: 2.5rem; }
+  .professions-cta { text-align: center; margin-top: 2.5rem; }
+  .professions-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
+
+  /* PLANES */
+  .pricing-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); }
+  .pricing-inner { max-width: 1100px; margin: 0 auto; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3rem; }
+  .pricing-card { background: var(--nexo-night); border: 0.5px solid rgba(196,184,232,0.12); border-radius: 16px; padding: 2rem; display: flex; flex-direction: column; transition: border-color 0.2s; position: relative; }
+  .pricing-card:hover { border-color: rgba(107,79,187,0.3); }
+  .pricing-card.featured { border-color: var(--nexo-violet); background: linear-gradient(160deg, rgba(107,79,187,0.12) 0%, var(--nexo-night) 60%); }
+  .pricing-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--nexo-violet); color: white; font-size: 0.65rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.9rem; border-radius: 100px; white-space: nowrap; }
+  .pricing-plan { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--nexo-violet-light); margin-bottom: 0.75rem; }
+  .pricing-price { font-size: 2.8rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.25rem; }
+  .pricing-price span { font-size: 1rem; font-weight: 400; color: var(--nexo-muted); }
+  .pricing-tagline { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.75rem; padding-bottom: 1.75rem; border-bottom: 0.5px solid rgba(196,184,232,0.1); line-height: 1.5; }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+  .pricing-features li { font-size: 0.82rem; color: var(--nexo-muted); padding-left: 1.25rem; position: relative; line-height: 1.5; }
+  .pricing-features li::before { content: '→'; position: absolute; left: 0; color: var(--nexo-violet-light); font-size: 0.75rem; top: 0.05rem; }
+  .pricing-features li strong { color: var(--nexo-text); font-weight: 500; }
+  .pricing-cta { margin-top: 2rem; display: inline-flex; justify-content: center; align-items: center; background: transparent; border: 0.5px solid rgba(196,184,232,0.25); color: var(--nexo-lavender); padding: 0.75rem 1.5rem; border-radius: 8px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.2s; font-family: 'Inter', sans-serif; width: 100%; }
+  .pricing-cta:hover { border-color: var(--nexo-violet); color: white; background: var(--nexo-violet); }
+  .pricing-card.featured .pricing-cta { background: var(--nexo-violet); border-color: var(--nexo-violet); color: white; }
+  .pricing-card.featured .pricing-cta:hover { background: var(--nexo-violet-light); }
+
+  /* FINAL CTA */
   .final-cta { text-align: center; padding: 7rem 4rem; max-width: 640px; margin: 0 auto; }
   .final-cta h2 { font-size: 2.5rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.2; }
   .final-cta p { color: var(--nexo-muted); margin-bottom: 2.5rem; font-size: 0.95rem; }
+
   footer { border-top: 0.5px solid rgba(196,184,232,0.1); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
   footer p { font-size: 0.8rem; color: var(--nexo-muted); }
-  .hero-wrapper { position: relative; overflow: hidden; }
-  .circles-bg { position: absolute; top:0;left:0;right:0;bottom:0; overflow:hidden; pointer-events:none; z-index:0; }
-  .circle { position: absolute; border-radius: 50%; border: 0.5px solid rgba(107,79,187,0.15); }
+
+  /* MODAL */
+  .nexo-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,37,0.85); backdrop-filter: blur(6px); z-index: 9999; align-items: center; justify-content: center; }
+  .nexo-modal-overlay.open { display: flex; }
+  .nexo-modal { background: var(--nexo-soft); border: 0.5px solid rgba(196,184,232,0.2); border-radius: 16px; width: min(720px, 95vw); height: min(680px, 90vh); display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 64px rgba(0,0,0,0.5); animation: modalIn 0.25s ease; }
+  @keyframes modalIn { from { opacity: 0; transform: translateY(16px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+  .nexo-modal-header { display: flex; align-items: center; justify-content: space-between; padding: 1.25rem 1.5rem; border-bottom: 0.5px solid rgba(196,184,232,0.12); flex-shrink: 0; }
+  .nexo-modal-header-left { display: flex; align-items: center; gap: 0.75rem; }
+  .nexo-modal-pill { background: rgba(107,79,187,0.25); border: 0.5px solid rgba(107,79,187,0.4); color: var(--nexo-lavender); font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 100px; }
+  .nexo-modal-title { font-size: 0.9rem; font-weight: 500; color: var(--nexo-near-white); }
+  .nexo-modal-close { background: none; border: none; color: var(--nexo-muted); cursor: pointer; font-size: 1.4rem; line-height: 1; padding: 0.25rem 0.5rem; border-radius: 6px; transition: color 0.2s, background 0.2s; }
+  .nexo-modal-close:hover { color: var(--nexo-near-white); background: rgba(196,184,232,0.08); }
+  .nexo-chat { flex: 1; display: flex; flex-direction: column; background: var(--nexo-night); min-height: 0; }
+  .nexo-chat-messages { flex: 1; padding: 1.25rem; overflow-y: auto; display: flex; flex-direction: column; gap: 0.85rem; }
+  .nexo-message { max-width: 82%; padding: 0.85rem 1rem; border-radius: 14px; font-size: 0.9rem; line-height: 1.55; white-space: pre-wrap; }
+  .nexo-message.bot { align-self: flex-start; background: rgba(196,184,232,0.08); border: 0.5px solid rgba(196,184,232,0.12); color: var(--nexo-text); border-bottom-left-radius: 4px; }
+  .nexo-message.user { align-self: flex-end; background: var(--nexo-violet); color: white; border-bottom-right-radius: 4px; }
+  .nexo-message.loading { color: var(--nexo-muted); font-style: italic; }
+  .nexo-chat-input { flex-shrink: 0; display: flex; gap: 0.75rem; padding: 1rem; border-top: 0.5px solid rgba(196,184,232,0.12); background: var(--nexo-soft); }
+  .nexo-chat-input textarea { flex: 1; min-height: 46px; max-height: 120px; resize: none; border: 0.5px solid rgba(196,184,232,0.18); border-radius: 10px; background: var(--nexo-night); color: var(--nexo-text); padding: 0.8rem 0.9rem; font-family: 'Inter', sans-serif; font-size: 0.9rem; outline: none; }
+  .nexo-chat-input textarea:focus { border-color: var(--nexo-violet-light); }
+  .nexo-chat-input button { flex-shrink: 0; border: none; border-radius: 10px; background: var(--nexo-violet); color: white; padding: 0 1.2rem; font-family: 'Inter', sans-serif; font-weight: 500; cursor: pointer; transition: background 0.2s, opacity 0.2s; }
+  .nexo-chat-input button:hover { background: var(--nexo-violet-light); }
+  .nexo-chat-input button:disabled { opacity: 0.55; cursor: not-allowed; }
+  .nexo-chat-note { padding: 0.75rem 1rem 0; font-size: 0.75rem; color: rgba(155,146,184,0.7); }
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <div class="logo"><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:102px;"></div>
+  <div class="logo"><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:72px;"></div>
   <ul>
-    <li><a href="#">Diagnóstico</a></li>
-    <li><a href="#">Cómo funciona</a></li>
-    <li><a href="#">Agentes</a></li>
+    <li><a href="#proceso">Tu proceso</a></li>
+    <li><a href="#diagnostico">Diagnóstico</a></li>
+    <li><a href="#planes">Planes</a></li>
     <li><a href="#" class="nav-cta" id="btn-nav">Activar nexo</a></li>
   </ul>
 </nav>
 
+<!-- HERO -->
 <div class="hero-wrapper">
   <div class="circles-bg">
     <div class="circle" style="width:600px;height:600px;top:-200px;left:-200px;opacity:0.4"></div>
@@ -109,11 +178,12 @@
     <span class="hero-tag">Diagnóstico IA · Reskilling personalizado · Acompañamiento semanal</span>
     <h1>El puente entre <em>quien eres</em> y quien necesitas ser.</h1>
     <p>La IA reconfigura el empleo. Nexo te dice exactamente cómo te afecta — y qué puedes hacer esta semana.</p>
-    <button class="btn-cta" id="btn-hero">Activar mi diagnóstico gratuito &rarr;</button>
+    <button class="btn-cta" id="btn-hero">Activar mi diagnóstico gratuito →</button>
     <span class="hero-sub">Sin tarjeta. Sin alarmismo. Con un plan concreto.</span>
   </div>
 </div>
 
+<!-- STATS -->
 <div class="stats">
   <div class="stat-item">
     <div class="stat-number">92M</div>
@@ -129,78 +199,400 @@
   </div>
 </div>
 
-<div class="agents-section">
-  <div class="section-label">El equipo</div>
-  <h2 class="section-title">Un ecosistema. Cuatro especialistas. Tu plan.</h2>
-  <p class="section-sub">Cada agente tiene nombre, especialidad y voz propia. Ninguno es genérico.</p>
-  <div class="agents-grid">
-    <div class="agent-card rio">
-      <div class="agent-name">RÍO</div>
-      <div class="agent-role">Diagnóstico de riesgo</div>
-      <div class="agent-quote">"Tu índice es 68/100. Hay tres cosas que puedes hacer esta semana."</div>
+<!-- EL PROCESO -->
+<div class="process-section" id="proceso">
+  <div class="process-inner">
+    <div class="section-label">El proceso</div>
+    <h2 class="section-title">Cuatro fases. Un plan concreto para esta semana.</h2>
+    <p class="section-sub">No es un test genérico. Es un diagnóstico que se construye contigo, paso a paso.</p>
+    <div class="process-grid">
+      <div class="process-card first">
+        <div class="process-num">Fase 01</div>
+        <div class="process-name">Diagnóstico de riesgo</div>
+        <div class="process-role">Exposición + Contexto personal</div>
+        <div class="process-desc">"Tu índice es 68/100. Hay tres cosas que puedes hacer esta semana."</div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">Fase 02</div>
+        <div class="process-name">Itinerario de reskilling</div>
+        <div class="process-role">Plan personalizado por fases</div>
+        <div class="process-desc">"La primera habilidad no es programar — es auditar con IA."</div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">Fase 03</div>
+        <div class="process-name">Seguimiento semanal</div>
+        <div class="process-role">Evolución y ajuste continuo</div>
+        <div class="process-desc">"60% del tramo 1. Esta semana cruzas."</div>
+      </div>
+      <div class="process-card">
+        <div class="process-num">Fase 04</div>
+        <div class="process-name">Análisis de tendencias</div>
+        <div class="process-role">Tu sector, en tiempo real</div>
+        <div class="process-desc">"Los perfiles híbridos tienen 34% más ofertas este trimestre."</div>
+      </div>
     </div>
-    <div class="agent-card">
-      <div class="agent-name">MAYA</div>
-      <div class="agent-role">Itinerario de reskilling</div>
-      <div class="agent-quote">"Te preparé 3 fases. La primera habilidad no es programar — es auditar con IA."</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-name">LEO</div>
-      <div class="agent-role">Seguimiento semanal</div>
-      <div class="agent-quote">"60% del tramo 1. Esta semana cruzas. ¿Te mando el resumen al podcast?"</div>
-    </div>
-    <div class="agent-card">
-      <div class="agent-name">SOL</div>
-      <div class="agent-role">Mercado y tendencias</div>
-      <div class="agent-quote">"En logística, los perfiles híbridos tienen 34% más ofertas este trimestre."</div>
+    <div class="process-cta">
+      <p>Conoce el detalle de cada fase y empieza por la primera.</p>
+      <button class="btn-cta modal-trigger">Iniciar mi diagnóstico →</button>
     </div>
   </div>
 </div>
 
-<div class="how-section">
-  <div class="how-inner">
-    <div class="section-label">Cómo funciona</div>
-    <h2 class="section-title">De la incertidumbre al plan. En una conversación.</h2>
-    <div class="steps">
-      <div class="step">
-        <div class="step-num">01</div>
-        <div class="step-title">RÍO te hace las preguntas correctas</div>
-        <div class="step-desc">8 preguntas sobre tu rol, tus tareas y tu contexto. Infiere cuando puede. Nunca más de una por turno.</div>
+<!-- EL DIAGNÓSTICO — QUÉ EVALUAMOS -->
+<div class="diag-section" id="diagnostico">
+  <div class="diag-inner">
+  <div class="section-label">El diagnóstico</div>
+  <h2 class="section-title">Cuatro dimensiones. Un resultado honesto.</h2>
+  <p class="section-sub">Ninguna dimensión sola dice la verdad. La combinación de las cuatro sí.</p>
+  <div class="eval-grid">
+    <div class="eval-card primary">
+      <div class="eval-icon">🔍</div>
+      <div class="eval-title">Exposición técnica de tus tareas</div>
+      <div class="eval-desc">Analizamos qué proporción de lo que haces cada día puede ser completado por la IA hoy, sin asistencia adicional. No es una opinión — es el resultado de evaluar miles de tareas laborales frente a modelos de lenguaje avanzados.</div>
+      <div class="eval-detail">La dimensión con mayor peso en tu score. El núcleo del diagnóstico.</div>
+    </div>
+    <div class="eval-card">
+      <div class="eval-icon">📊</div>
+      <div class="eval-title">Velocidad de adopción en tu sector</div>
+      <div class="eval-desc">No todos los sectores cambian al mismo ritmo. Evaluamos qué tan rápido está adoptando la IA tu industria concreta — finanzas, logística, educación, salud — y qué implica eso para tu horizonte de tiempo.</div>
+      <div class="eval-detail">Basado en datos de adopción por sector de informes globales recientes.</div>
+    </div>
+    <div class="eval-card">
+      <div class="eval-icon">🛡️</div>
+      <div class="eval-title">Tus factores protectores</div>
+      <div class="eval-desc">Lo que ningún dataset puede saber: si llevas 15 años en tu área, si gestionas un equipo, si ya usas IA en tu trabajo. Estos factores reducen el riesgo real aunque tus tareas tengan alta exposición. La conversación los captura.</div>
+      <div class="eval-detail">El factor diferencial. Solo tú lo sabes. Nosotros lo medimos.</div>
+    </div>
+    <div class="eval-card">
+      <div class="eval-icon">⚡</div>
+      <div class="eval-title">Velocidad de cambio en tu entorno</div>
+      <div class="eval-desc">¿Tu empresa ya está adoptando IA? ¿Tu sector está en plena transformación o apenas empieza? El ritmo al que llegará el cambio a tu entorno concreto determina tu margen de tiempo para actuar.</div>
+      <div class="eval-detail">Cruzado con el tipo y tamaño de empresa que declaras en la conversación.</div>
+    </div>
+  </div>
+  <div class="process-cta">
+    <p>Cuatro dimensiones. Un solo resultado: el tuyo.</p>
+    <button class="btn-cta modal-trigger">Quiero ver mi diagnóstico →</button>
+  </div>
+  </div>
+</div>
+
+<!-- NIVELES DE RIESGO -->
+<div class="levels-section">
+  <div class="levels-inner">
+    <div class="section-label">Tu resultado</div>
+    <h2 class="section-title">Cuatro niveles. Uno es el tuyo.</h2>
+    <p class="section-sub" style="margin-bottom:0">El score va de 0 a 100. Cada nivel tiene un plan de acción diferente.</p>
+    <div class="levels-grid">
+      <div class="level-card low">
+        <div class="level-range">0–30</div>
+        <div class="level-label">Perfil resiliente</div>
+        <div class="level-desc">Tu rol tiene alta resistencia a la automatización. El plan se enfoca en potenciar lo que ya funciona usando IA como herramienta.</div>
       </div>
-      <div class="step">
-        <div class="step-num">02</div>
-        <div class="step-title">Calcula tu índice de riesgo</div>
-        <div class="step-desc">Cruza tu perfil con datos de Eloundou et al. (Science, 2024), McKinsey 2023 y WEF 2025.</div>
+      <div class="level-card med">
+        <div class="level-range">31–60</div>
+        <div class="level-label">Adaptación recomendada</div>
+        <div class="level-desc">Zona de transición. El reskilling selectivo en skills complementarias te mantiene adelante.</div>
       </div>
-      <div class="step">
-        <div class="step-num">03</div>
-        <div class="step-title">Te entrega un plan accionable</div>
-        <div class="step-desc">Mapa de habilidades, ruta de reskilling por fases y un primer paso para esta semana.</div>
+      <div class="level-card high">
+        <div class="level-range">61–80</div>
+        <div class="level-label">Transición urgente</div>
+        <div class="level-desc">Parte importante de tu trabajo tiene alta exposición. Un plan estructurado en 30–45 días marca la diferencia.</div>
       </div>
+      <div class="level-card urgent">
+        <div class="level-range">81–100</div>
+        <div class="level-label">Acción inmediata</div>
+        <div class="level-desc">La reconversión activa es la ruta. El sistema te da un primer paso concreto para esta semana — no para el año que viene.</div>
+      </div>
+    </div>
+    <div class="levels-cta">
+      <p>Descubre el tuyo. La conversación dura menos de 10 minutos.</p>
+      <button class="btn-cta modal-trigger">Hacer mi diagnóstico →</button>
     </div>
   </div>
 </div>
 
+<!-- PROFESIONES -->
+<div class="professions-section">
+  <div class="professions-inner">
+    <div class="section-label">Cobertura actual</div>
+    <h2 class="section-title">Evaluamos más de 35 perfiles profesionales.</h2>
+    <p class="section-sub">Los más frecuentes del mercado laboral, con datos trazables para cada uno.</p>
+    <div class="professions-grid">
+      <span class="prof-tag high">Auxiliar administrativo/a</span>
+      <span class="prof-tag high">Técnico/a contable</span>
+      <span class="prof-tag high">Atención al cliente</span>
+      <span class="prof-tag high">Recepcionista</span>
+      <span class="prof-tag high">Técnico/a de RRHH</span>
+      <span class="prof-tag high">Paralegal</span>
+      <span class="prof-tag high">Asesor/a financiero/a</span>
+      <span class="prof-tag high">Agente comercial</span>
+      <span class="prof-tag high">Analista de marketing digital</span>
+      <span class="prof-tag high">Community manager</span>
+      <span class="prof-tag high">Diseñador/a gráfico/a</span>
+      <span class="prof-tag high">Soporte IT</span>
+      <span class="prof-tag high">Operario/a de logística</span>
+      <span class="prof-tag high">Agente de seguros</span>
+      <span class="prof-tag">Analista de datos</span>
+      <span class="prof-tag">Redactor/a · Periodista</span>
+      <span class="prof-tag">Desarrollador/a software</span>
+      <span class="prof-tag">Conductor/a · Repartidor/a</span>
+      <span class="prof-tag">Dependiente/a de comercio</span>
+      <span class="prof-tag">Economista</span>
+      <span class="prof-tag">Técnico/a de mantenimiento</span>
+      <span class="prof-tag">Aparejador/a</span>
+      <span class="prof-tag">Gestor/a de proyectos</span>
+      <span class="prof-tag">Ingeniero/a de producción</span>
+      <span class="prof-tag">Técnico/a telecomunicaciones</span>
+      <span class="prof-tag">Docente</span>
+      <span class="prof-tag">Camarero/a</span>
+      <span class="prof-tag">Cocinero/a</span>
+      <span class="prof-tag">Fontanero/a · Instalador/a</span>
+      <span class="prof-tag">Electricista</span>
+      <span class="prof-tag">Auxiliar de enfermería</span>
+      <span class="prof-tag">Trabajador/a social</span>
+      <span class="prof-tag">Enfermero/a</span>
+      <span class="prof-tag">Psicólogo/a</span>
+      <span class="prof-tag">Médico/a</span>
+    </div>
+    <p class="professions-note">Los perfiles en violeta tienen score de riesgo alto según los datos actuales. Si tu profesión no aparece, el sistema aproxima tu diagnóstico con el perfil más cercano.</p>
+    <div class="professions-cta">
+      <p>¿Está la tuya? Descúbrelo en minutos.</p>
+      <button class="btn-cta modal-trigger">Es hora de iniciar mi diagnóstico →</button>
+    </div>
+  </div>
+</div>
+
+<!-- PLANES -->
+<div class="pricing-section" id="planes">
+  <div class="pricing-inner">
+    <div class="section-label">Planes</div>
+    <h2 class="section-title">Empieza gratis. Avanza cuando estés listo.</h2>
+    <p class="section-sub">Sin permanencia. Sin compromisos. Cancela cuando quieras.</p>
+    <div class="pricing-grid">
+
+      <div class="pricing-card">
+        <div class="pricing-plan">Gratuito</div>
+        <div class="pricing-price">$0</div>
+        <p class="pricing-tagline">Tu diagnóstico completo, sin coste. Porque entender el riesgo no debería tener precio.</p>
+        <ul class="pricing-features">
+          <li><strong>Score de riesgo personalizado</strong> — índice 0–100 con nivel y etiqueta de urgencia</li>
+          <li><strong>Mapa de habilidades</strong> — en riesgo, transferibles y potenciables con IA</li>
+          <li><strong>Informe PDF por email</strong> — con tu diagnóstico completo y primer paso concreto</li>
+          <li>+35 perfiles cubiertos · Datos trazables</li>
+        </ul>
+        <button class="pricing-cta modal-trigger">Activar diagnóstico gratis →</button>
+      </div>
+
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Más popular</div>
+        <div class="pricing-plan">Profesional</div>
+        <div class="pricing-price">$5 <span>/ mes</span></div>
+        <p class="pricing-tagline">Un plan de reskilling que evoluciona contigo. Semana a semana, habilidad a habilidad.</p>
+        <ul class="pricing-features">
+          <li>Todo lo del plan Gratuito</li>
+          <li><strong>Plan personalizado de reskilling</strong> — ruta por fases calibrada a tus horas disponibles</li>
+          <li><strong>Seguimiento semanal</strong> — chequeos cortos para medir evolución y ajustar el plan</li>
+          <li><strong>Nuevas skills con ejercicios prácticos</strong> — aplicación real, no teoría</li>
+          <li>Cursos reales con nombre, plataforma y duración</li>
+        </ul>
+        <button class="pricing-cta modal-trigger">Empezar por $5 →</button>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-plan">Premium</div>
+        <div class="pricing-price">$15 <span>/ mes</span></div>
+        <p class="pricing-tagline">Conectado al mercado en tiempo real. Alertas cuando el mercado se mueve, oportunidades cuando aparecen.</p>
+        <ul class="pricing-features">
+          <li>Todo lo del plan Profesional</li>
+          <li><strong>Alertas de IA personalizadas</strong> — noticias del sector filtradas para tu perfil</li>
+          <li><strong>Conexión con portales de empleo</strong> — ofertas que encajan con tus skills en tiempo real</li>
+          <li><strong>Monitor de demanda</strong> — detecta qué habilidades suben en tu industria</li>
+          <li>Prioridad en nuevas funcionalidades</li>
+        </ul>
+        <button class="pricing-cta modal-trigger">Empezar por $15 →</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
 <div class="final-cta">
-  <h2>Activa tu nexo. El diagnóstico es gratis.</h2>
+  <h2>Tu diagnóstico te espera. Es gratis.</h2>
   <p>Sin tarjeta de crédito. Sin alarmismo. Con un plan concreto para esta semana.</p>
-  <button class="btn-cta" id="btn-final">Hablar con RÍO &rarr;</button>
+  <button class="btn-cta modal-trigger">Activar mi diagnóstico →</button>
 </div>
 
 <footer>
-  <div><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:80px;opacity:0.8;"></div>
+  <div><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:40px;opacity:0.8;"></div>
   <p>MIB AIEx · Equipo 3 · Junio 2026</p>
   <p>Diagnóstico IA · Reskilling personalizado · Acompañamiento semanal</p>
 </footer>
 
+<!-- Modal -->
+<div class="nexo-modal-overlay" id="nexo-modal-overlay" role="dialog" aria-modal="true">
+  <div class="nexo-modal">
+    <div class="nexo-modal-header">
+      <div class="nexo-modal-header-left">
+        <span class="nexo-modal-pill">Diagnóstico</span>
+        <span class="nexo-modal-title">Informe de desarrollo profesional</span>
+      </div>
+      <button class="nexo-modal-close" id="nexo-modal-close" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="nexo-chat" aria-label="Chat de diagnóstico Nexo">
+      <div class="nexo-chat-note">RÍO te hará una pregunta a la vez. Responde con naturalidad para recibir tu diagnóstico.</div>
+      <div class="nexo-chat-messages" id="nexo-chat-messages"></div>
+      <form class="nexo-chat-input" id="nexo-chat-form">
+        <textarea id="nexo-chat-text" rows="1" placeholder="Escribe tu respuesta..." autocomplete="off"></textarea>
+        <button id="nexo-chat-send" type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    function goToChat() { window.location.href = 'chat.html'; }
-    document.getElementById('btn-hero').addEventListener('click', goToChat);
-    document.getElementById('btn-final').addEventListener('click', goToChat);
-    document.getElementById('btn-nav').addEventListener('click', function(e) { e.preventDefault(); goToChat(); });
+  const N8N_CHAT_WEBHOOK = 'https://equipo3aiexisdi.app.n8n.cloud/webhook/2f3f7d77-08f8-4090-a81a-3f352d14c846/chat';
+
+  const overlay = document.getElementById('nexo-modal-overlay');
+  const messagesEl = document.getElementById('nexo-chat-messages');
+  const formEl = document.getElementById('nexo-chat-form');
+  const inputEl = document.getElementById('nexo-chat-text');
+  const sendBtn = document.getElementById('nexo-chat-send');
+
+  const sessionId = getOrCreateSessionId();
+  let hasStarted = false;
+
+  function getOrCreateSessionId() {
+    const key = 'nexo_rio_session_id';
+    let id = window.localStorage.getItem(key);
+    if (!id) {
+      id = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : `nexo-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+      window.localStorage.setItem(key, id);
+    }
+    return id;
+  }
+
+  function openModal() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    inputEl.focus();
+
+    if (!hasStarted) {
+      hasStarted = true;
+      addMessage('bot', 'Hola, soy RÍO. Para empezar: ¿a qué te dedicas y qué tareas ocupan la mayor parte de tu día?');
+    }
+  }
+
+  function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function addMessage(type, text, extraClass = '') {
+    const msg = document.createElement('div');
+    msg.className = `nexo-message ${type} ${extraClass}`.trim();
+    msg.textContent = text;
+    messagesEl.appendChild(msg);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return msg;
+  }
+
+  function extractBotReply(data) {
+    if (typeof data === 'string') return data;
+    if (!data) return '';
+    if (Array.isArray(data)) return extractBotReply(data[0]);
+
+    return data.output
+      || data.reply
+      || data.response
+      || data.text
+      || data.message
+      || data.answer
+      || data.chatOutput
+      || data.data?.output
+      || data.data?.reply
+      || data.data?.message
+      || '';
+  }
+
+  async function sendToN8N(userMessage) {
+    const payload = {
+      action: 'sendMessage',
+      sessionId,
+      chatInput: userMessage,
+      message: userMessage
+    };
+
+    const response = await fetch(N8N_CHAT_WEBHOOK, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error ${response.status}: ${response.statusText}`);
+    }
+
+    const contentType = response.headers.get('content-type') || '';
+    return contentType.includes('application/json') ? response.json() : response.text();
+  }
+
+  formEl.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const userMessage = inputEl.value.trim();
+    if (!userMessage) return;
+
+    addMessage('user', userMessage);
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+
+    const loadingMsg = addMessage('bot', 'RÍO está analizando tu respuesta...', 'loading');
+
+    try {
+      const data = await sendToN8N(userMessage);
+      const botReply = extractBotReply(data) || 'Recibí tu respuesta. Sigamos: ¿qué tarea te lleva más tiempo a la semana?';
+      loadingMsg.remove();
+      addMessage('bot', botReply);
+    } catch (error) {
+      loadingMsg.remove();
+      addMessage('bot', 'No pude conectar con RÍO en este momento. Revisa que el webhook de n8n esté activo, en producción, y que permita CORS desde esta landing.');
+      console.error('Error conectando con n8n:', error);
+    } finally {
+      sendBtn.disabled = false;
+      inputEl.focus();
+    }
+  });
+
+  inputEl.addEventListener('input', () => {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = `${Math.min(inputEl.scrollHeight, 120)}px`;
+  });
+
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      formEl.requestSubmit();
+    }
+  });
+
+  document.querySelectorAll('.modal-trigger, #btn-hero, #btn-nav').forEach(el => {
+    el.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
+  });
+
+  document.getElementById('nexo-modal-close').addEventListener('click', closeModal);
+  overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const el = document.querySelector(id);
+      if (el) { e.preventDefault(); el.scrollIntoView({ behavior: 'smooth' }); }
+    });
   });
 </script>
-
 </body>
 </html>
