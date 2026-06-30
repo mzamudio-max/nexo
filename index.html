@@ -636,34 +636,53 @@
   }
 
   function extractBotReply(data) {
-  if (!data) return '';
+    if (!data) return '';
 
-  if (typeof data === 'string') return data;
+    if (typeof data === 'string') return data;
 
-  if (Array.isArray(data)) {
-    const streamingText = data
-      .filter(item => item && item.type === 'item' && item.content)
-      .map(item => item.content)
-      .join('');
+    if (Array.isArray(data)) {
+      // Prioridad 1: si n8n devuelve un output final explícito, usamos ese.
+      // Esto es clave después de Gmail/Sheets, porque el último Edit Fields devuelve { output: "..." }.
+      const explicitOutputs = data
+        .map(item =>
+          item?.output ||
+          item?.reply ||
+          item?.response ||
+          item?.text ||
+          item?.message ||
+          item?.chatOutput ||
+          item?.result?.output ||
+          item?.data?.output ||
+          ''
+        )
+        .filter(Boolean);
 
-    if (streamingText) return streamingText;
+      if (explicitOutputs.length) return explicitOutputs[explicitOutputs.length - 1];
 
-    return data.map(item => extractBotReply(item)).filter(Boolean).join('');
+      // Prioridad 2: streaming del Chat Trigger de n8n.
+      const streamingText = data
+        .filter(item => item && item.type === 'item' && item.content)
+        .map(item => item.content)
+        .join('');
+
+      if (streamingText) return streamingText;
+
+      return data.map(item => extractBotReply(item)).filter(Boolean).join('');
+    }
+
+    return (
+      data.output ||
+      data.reply ||
+      data.response ||
+      data.text ||
+      data.content ||
+      data.message ||
+      data.chatOutput ||
+      data.result?.output ||
+      data.data?.output ||
+      ''
+    );
   }
-
-  return (
-    data.output ||
-    data.reply ||
-    data.response ||
-    data.text ||
-    data.content ||
-    data.message ||
-    data.chatOutput ||
-    data.result?.output ||
-    data.data?.output ||
-    ''
-  );
-}
 
   async function sendToN8N(userMessage) {
     const payload = {
@@ -705,7 +724,7 @@
 
     try {
       const data = await sendToN8N(userMessage);
-      const botReply = extractBotReply(data) || 'Recibí tu respuesta. Sigamos: ¿qué tarea te lleva más tiempo a la semana?';
+      const botReply = extractBotReply(data) || 'Tu respuesta fue procesada correctamente, pero no recibí un mensaje final para mostrar. Revisa que el último nodo de n8n devuelva un campo llamado output.';
       loadingMsg.remove();
       addMessage('bot', botReply);
     } catch (error) {
