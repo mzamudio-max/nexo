@@ -592,19 +592,37 @@
     return card;
   }
 
+const FINAL_DIAGNOSIS_MESSAGE = `🚀 Ya dimos el primer paso.
 
+Tu diagnóstico personalizado ya fue enviado al correo que nos compartiste.
+
+El diagnóstico te muestra dónde estás hoy. Pero tu siguiente movimiento es lo que puede cambiar tu ruta.
+
+Con Nexo Profesional puedes convertir ese diagnóstico en un plan vivo, con seguimiento semanal y recomendaciones personalizadas para avanzar paso a paso.
+
+Con el plan profesional tendrás:
+
+✅ Una ruta de aprendizaje diseñada para tu perfil
+🤖 Acompañamiento semanal con IA
+📚 Cursos y certificaciones recomendadas
+📈 Seguimiento de tu avance
+🎯 Retos semanales para desarrollar habilidades clave
+
+Porque prepararte no debería ser algo que haces cuando ya es tarde.
+
+¿Quieres conocer cómo sería tu plan profesional?`;
   function addMessage(type, text, extraClass = '') {
-    if (type === 'bot' && isDiagnosis(text)) {
-      return addDiagnosisCard(text);
-    }
-
-    const msg = document.createElement('div');
-    msg.className = `nexo-message ${type} ${extraClass}`.trim();
-    msg.textContent = text;
-    messagesEl.appendChild(msg);
-    messagesEl.scrollTop = messagesEl.scrollHeight;
-    return msg;
+  if (type === 'bot' && isDiagnosis(text)) {
+    text = FINAL_DIAGNOSIS_MESSAGE;
   }
+
+  const msg = document.createElement('div');
+  msg.className = `nexo-message ${type} ${extraClass}`.trim();
+  msg.textContent = text;
+  messagesEl.appendChild(msg);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+  return msg;
+}
 
   function safeParseN8NResponse(rawText) {
     if (!rawText) return {};
