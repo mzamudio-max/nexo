@@ -609,69 +609,94 @@
   function safeParseN8NResponse(rawText) {
     if (!rawText) return {};
 
-    // Caso normal: n8n devuelve un único JSON válido
+    // 1) JSON único normal
     try {
       return JSON.parse(rawText);
-    } catch (_) {
-      // Caso frecuente en Chat Trigger: devuelve varias líneas JSON/SSE
-      const lines = rawText
-        .split(/\r?\n/)
-        .map(line => line.trim())
-        .filter(Boolean)
-        .map(line => line.startsWith('data:') ? line.slice(5).trim() : line);
+    } catch (_) {}
 
-      const parsed = [];
-      for (const line of lines) {
-        if (line === '[DONE]') continue;
-        try {
-          parsed.push(JSON.parse(line));
-        } catch (_) {
-          // Si una línea no es JSON, la conservamos como texto
-          parsed.push(line);
+    // 2) n8n Chat Trigger puede devolver múltiples JSON pegados o en líneas:
+    // {"type":"item","content":"Ho"}{"type":"item","content":"la"}{"type":"end"}
+    const cleaned = rawText
+      .replace(/\r/g, '')
+      .split('\n')
+      .map(line => line.trim())
+      .filter(Boolean)
+      .map(line => line.startsWith('data:') ? line.slice(5).trim() : line)
+      .join('\n');
+
+    const parsed = [];
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+    let buffer = '';
+
+    for (const ch of cleaned) {
+      if (!buffer && ch !== '{' && ch !== '[') continue;
+      buffer += ch;
+
+      if (escaped) {
+        escaped = false;
+        continue;
+      }
+      if (ch === '\\' && inString) {
+        escaped = true;
+        continue;
+      }
+      if (ch === '"') {
+        inString = !inString;
+        continue;
+      }
+      if (!inString) {
+        if (ch === '{' || ch === '[') depth++;
+        if (ch === '}' || ch === ']') depth--;
+        if (depth === 0 && buffer.trim()) {
+          try {
+            parsed.push(JSON.parse(buffer));
+          } catch (_) {
+            parsed.push(buffer);
+          }
+          buffer = '';
         }
       }
-
-      return parsed.length ? parsed : rawText;
     }
+
+    if (parsed.length) return parsed;
+    return rawText;
   }
 
   function extractBotReply(data) {
     if (!data) return '';
 
-    if (typeof data === 'string') return data;
+    if (typeof data === 'string') {
+      // Si por alguna razón llega texto crudo con JSON pegado, lo volvemos a intentar parsear.
+      if (data.includes('"type"') || data.includes('"output"')) {
+        const reparsed = safeParseN8NResponse(data);
+        if (reparsed !== data) return extractBotReply(reparsed);
+      }
+      return data;
+    }
 
     if (Array.isArray(data)) {
-      // Prioridad 1: si n8n devuelve un output final explícito, usamos ese.
-      // Esto es clave después de Gmail/Sheets, porque el último Edit Fields devuelve { output: "..." }.
+      // 1) Prioridad: un output explícito del último nodo Edit Fields.
       const explicitOutputs = data
-        .map(item =>
-          item?.output ||
-          item?.reply ||
-          item?.response ||
-          item?.text ||
-          item?.message ||
-          item?.chatOutput ||
-          item?.result?.output ||
-          item?.data?.output ||
-          ''
-        )
+        .map(item => item?.output || item?.json?.output || item?.data?.output || item?.result?.output || '')
         .filter(Boolean);
-
       if (explicitOutputs.length) return explicitOutputs[explicitOutputs.length - 1];
 
-      // Prioridad 2: streaming del Chat Trigger de n8n.
+      // 2) n8n streaming: reconstruir la respuesta con todos los content de type=item.
       const streamingText = data
-        .filter(item => item && item.type === 'item' && item.content)
+        .filter(item => item && item.type === 'item' && typeof item.content === 'string')
         .map(item => item.content)
         .join('');
-
       if (streamingText) return streamingText;
 
+      // 3) Fallback recursivo.
       return data.map(item => extractBotReply(item)).filter(Boolean).join('');
     }
 
     return (
       data.output ||
+      data.json?.output ||
       data.reply ||
       data.response ||
       data.text ||
@@ -724,7 +749,7 @@
 
     try {
       const data = await sendToN8N(userMessage);
-      const botReply = extractBotReply(data) || 'Tu respuesta fue procesada correctamente, pero no recibí un mensaje final para mostrar. Revisa que el último nodo de n8n devuelva un campo llamado output.';
+      const botReply = extractBotReply(data) || 'Recibí tu respuesta. Sigamos: ¿qué tarea te lleva más tiempo a la semana?';
       loadingMsg.remove();
       addMessage('bot', botReply);
     } catch (error) {
