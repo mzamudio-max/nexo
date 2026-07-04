@@ -100,6 +100,28 @@
   .professions-cta { text-align: center; margin-top: 2.5rem; }
   .professions-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
 
+  /* EQUIPO — Quiénes somos */
+  .team-section { padding: 6rem 4rem; border-top: 0.5px solid rgba(196,184,232,0.1); }
+  .team-inner { max-width: 1100px; margin: 0 auto; }
+  .team-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.25rem; margin-top: 2.5rem; }
+  .team-card { background: var(--nexo-soft); border: 0.5px solid rgba(196,184,232,0.12); border-radius: 14px; padding: 1.5rem; transition: border-color 0.2s; }
+  .team-card:hover { border-color: rgba(107,79,187,0.4); }
+  .team-avatar { width: 56px; height: 56px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.1rem; color: white; margin-bottom: 1rem; background: linear-gradient(135deg, var(--nexo-violet), var(--nexo-violet-light)); }
+  .team-name { font-size: 1rem; font-weight: 600; color: var(--nexo-near-white); margin-bottom: 0.15rem; }
+  .team-role { font-size: 0.75rem; color: var(--nexo-violet-light); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; }
+  .team-desc { font-size: 0.82rem; color: var(--nexo-muted); line-height: 1.6; }
+  .team-values { display: flex; justify-content: center; gap: 0; margin-top: 3rem; border: 0.5px solid rgba(196,184,232,0.15); border-radius: 12px; overflow: hidden; }
+  .team-values span { flex: 1; text-align: center; padding: 1rem; font-size: 0.82rem; color: var(--nexo-muted); border-right: 0.5px solid rgba(196,184,232,0.12); }
+  .team-values span:last-child { border-right: none; }
+
+  /* VIDEO */
+  .video-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); border-bottom: 0.5px solid rgba(196,184,232,0.1); }
+  .video-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+  .video-frame { margin-top: 2.5rem; position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 16px; overflow: hidden; border: 0.5px solid rgba(196,184,232,0.15); background: var(--nexo-night); display: flex; align-items: center; justify-content: center; }
+  .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .video-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; color: var(--nexo-muted); font-size: 0.85rem; padding: 2rem; }
+  .video-placeholder-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(107,79,187,0.2); border: 0.5px solid rgba(107,79,187,0.5); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--nexo-lavender); }
+
   /* PLANES */
   .pricing-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); }
   .pricing-inner { max-width: 1100px; margin: 0 auto; }
@@ -178,6 +200,9 @@
     .nexo-score-row { flex-direction: column; align-items: flex-start; }
     .nexo-score-circle { width: 96px; height: 96px; }
   }
+  @media (max-width: 900px) {
+    .team-grid { grid-template-columns: repeat(2,1fr); }
+  }
 
 </style>
 </head>
@@ -185,10 +210,11 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo"><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:120px;"></div>
+  <div class="logo">nexo</div>
   <ul>
     <li><a href="#proceso">Tu proceso</a></li>
     <li><a href="#diagnostico">Diagnóstico</a></li>
+    <li><a href="#equipo">Equipo</a></li>
     <li><a href="#planes">Planes</a></li>
     <li><a href="#" class="nav-cta" id="btn-nav">Activar nexo</a></li>
   </ul>
@@ -389,6 +415,91 @@
   </div>
 </div>
 
+<!-- EQUIPO — QUIÉNES SOMOS -->
+<div class="team-section" id="equipo">
+  <div class="team-inner">
+    <div class="section-label">Quiénes somos</div>
+    <h2 class="section-title">Un equipo multidisciplinario, un solo objetivo.</h2>
+    <p class="section-sub">Somos el Equipo 3: personas de marketing, negocio, riesgo, datos, finanzas, arquitectura y desarrollo humano trabajando juntas para ayudarte a dar el siguiente paso en tu carrera con IA.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">C</div>
+        <div class="team-name">Carlos</div>
+        <div class="team-role">Marketing y Comunicaciones</div>
+        <div class="team-desc">Construye la voz de nexo y cómo llegamos a ti: comunicación, marca y engagement, para que el mensaje sea claro antes que alarmista.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">B</div>
+        <div class="team-name">Borja</div>
+        <div class="team-role">Sponsor de Negocio</div>
+        <div class="team-desc">Da la dirección estratégica del proyecto: negocio, crecimiento y liderazgo, cuidando que cada decisión tenga impacto real.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">A</div>
+        <div class="team-name">Alfonso</div>
+        <div class="team-role">Compliance</div>
+        <div class="team-desc">Vela por el gobierno, el riesgo y el cumplimiento de nexo, asegurando que tu diagnóstico sea confiable y responsable.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">G</div>
+        <div class="team-name">Gonzalo</div>
+        <div class="team-role">QA Data Analyst</div>
+        <div class="team-desc">Valida la calidad de los datos detrás de cada score: testing, consistencia y analítica para que tu resultado sea preciso.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">M</div>
+        <div class="team-name">Mónica</div>
+        <div class="team-role">Challenger</div>
+        <div class="team-desc">Reta al equipo a innovar y transformar cada idea, cuestionando lo obvio para que nexo resuelva un problema real.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">L</div>
+        <div class="team-name">Lola</div>
+        <div class="team-role">Líder de Finanzas</div>
+        <div class="team-desc">Traduce la estrategia en números: análisis, reportes y proyecciones que hacen sostenible el modelo de nexo.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">I</div>
+        <div class="team-name">Isa</div>
+        <div class="team-role">Solution Architect</div>
+        <div class="team-desc">Diseña la arquitectura detrás del diagnóstico y del chatbot: planeación técnica que conecta cada pieza del producto.</div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">N</div>
+        <div class="team-name">Nuria</div>
+        <div class="team-role">Coach &amp; Mentora</div>
+        <div class="team-desc">Acompaña el desarrollo del equipo y del contenido de mentoría: la misma filosofía de acompañamiento que recibirás en nexo.</div>
+      </div>
+    </div>
+    <div class="team-values">
+      <span>Colaboración</span>
+      <span>Enfoque</span>
+      <span>Innovación</span>
+      <span>Resultados</span>
+    </div>
+  </div>
+</div>
+
+<!-- VIDEO -->
+<div class="video-section" id="video">
+  <div class="video-inner">
+    <div class="section-label">Conócenos en video</div>
+    <h2 class="section-title">Nexo, explicado en menos de 2 minutos.</h2>
+    <p class="section-sub" style="margin: 0 auto;">Estamos terminando de producir este video. En cuanto esté listo, solo hay que reemplazar el enlace abajo.</p>
+    <div class="video-frame">
+      <!-- Cuando el video esté listo, reemplaza el <div class="video-placeholder"> por:
+      <video controls poster="RUTA_DEL_POSTER.jpg">
+        <source src="RUTA_DEL_VIDEO.mp4" type="video/mp4">
+      </video>
+      o incrusta un iframe de YouTube/Vimeo aquí. -->
+      <div class="video-placeholder">
+        <div class="video-placeholder-icon">▶</div>
+        <div>Video en producción — próximamente aquí</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- PLANES -->
 <div class="pricing-section" id="planes">
   <div class="pricing-inner">
@@ -451,7 +562,7 @@
 </div>
 
 <footer>
-  <div><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:80px;opacity:0.8;"></div>
+  <div>nexo</div>
   <p>MIB AIEx · Equipo 3 · Junio 2026</p>
   <p>Diagnóstico IA · Reskilling personalizado · Acompañamiento semanal</p>
 </footer>
@@ -478,8 +589,8 @@
 </div>
 
 <script>
-  const N8N_CHAT_WEBHOOK = 'https://equipo3aiexisdi.app.n8n.cloud/webhook/2f3f7d77-08f8-4090-a81a-3f352d14c846/chat';
-  const N8N_CHAT_URL = `${N8N_CHAT_WEBHOOK}?action=sendMessage`; // n8n Chat Trigger espera action como query param
+  // Nuevo endpoint: chatbot (ya no es un n8n Chat Trigger, es un webhook estándar)
+  const N8N_WEBHOOK_URL = 'https://equipo3aiexisdi.app.n8n.cloud/webhook/chatbot-nexo-perfil';
 
   const overlay = document.getElementById('nexo-modal-overlay');
   const messagesEl = document.getElementById('nexo-chat-messages');
@@ -515,7 +626,6 @@
     overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
-
 
   function escapeHTML(value) {
     return String(value || '')
@@ -592,7 +702,7 @@
     return card;
   }
 
-const FINAL_DIAGNOSIS_MESSAGE = `🚀 Ya dimos el primer paso.
+  const FINAL_DIAGNOSIS_MESSAGE = `🚀 Ya dimos el primer paso.
 
 Tu diagnóstico personalizado ya fue enviado al correo que nos compartiste.
 
@@ -611,18 +721,19 @@ Con el plan profesional tendrás:
 Porque prepararte no debería ser algo que haces cuando ya es tarde.
 
 ¿Quieres conocer cómo sería tu plan profesional?`;
-  function addMessage(type, text, extraClass = '') {
-  if (type === 'bot' && isDiagnosis(text)) {
-    text = FINAL_DIAGNOSIS_MESSAGE;
-  }
 
-  const msg = document.createElement('div');
-  msg.className = `nexo-message ${type} ${extraClass}`.trim();
-  msg.textContent = text;
-  messagesEl.appendChild(msg);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
-  return msg;
-}
+  function addMessage(type, text, extraClass = '') {
+    if (type === 'bot' && isDiagnosis(text)) {
+      text = FINAL_DIAGNOSIS_MESSAGE;
+    }
+
+    const msg = document.createElement('div');
+    msg.className = `nexo-message ${type} ${extraClass}`.trim();
+    msg.textContent = text;
+    messagesEl.appendChild(msg);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return msg;
+  }
 
   function safeParseN8NResponse(rawText) {
     if (!rawText) return {};
@@ -632,7 +743,7 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
       return JSON.parse(rawText);
     } catch (_) {}
 
-    // 2) n8n Chat Trigger puede devolver múltiples JSON pegados o en líneas:
+    // 2) El webhook puede devolver varios JSON pegados o en líneas:
     // {"type":"item","content":"Ho"}{"type":"item","content":"la"}{"type":"end"}
     const cleaned = rawText
       .replace(/\r/g, '')
@@ -686,7 +797,6 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     if (!data) return '';
 
     if (typeof data === 'string') {
-      // Si por alguna razón llega texto crudo con JSON pegado, lo volvemos a intentar parsear.
       if (data.includes('"type"') || data.includes('"output"')) {
         const reparsed = safeParseN8NResponse(data);
         if (reparsed !== data) return extractBotReply(reparsed);
@@ -695,23 +805,20 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     }
 
     if (Array.isArray(data)) {
-      // 1) Prioridad: un output explícito del último nodo Edit Fields.
-    const explicitOutputs = data
-  .map(item => item?.output || item?.json?.output || item?.data?.output || item?.result?.output || '')
-  .filter(Boolean);
+      const explicitOutputs = data
+        .map(item => item?.output || item?.json?.output || item?.data?.output || item?.result?.output || '')
+        .filter(Boolean);
 
-if (explicitOutputs.length) {
-  return FINAL_DIAGNOSIS_MESSAGE;
-}
+      if (explicitOutputs.length) {
+        return FINAL_DIAGNOSIS_MESSAGE;
+      }
 
-      // 2) n8n streaming: reconstruir la respuesta con todos los content de type=item.
       const streamingText = data
         .filter(item => item && item.type === 'item' && typeof item.content === 'string')
         .map(item => item.content)
         .join('');
       if (streamingText) return streamingText;
 
-      // 3) Fallback recursivo.
       return data.map(item => extractBotReply(item)).filter(Boolean).join('');
     }
 
@@ -732,22 +839,21 @@ if (explicitOutputs.length) {
 
   async function sendToN8N(userMessage) {
     const payload = {
-      action: 'sendMessage',
       sessionId,
-      chatInput: userMessage,
-      message: userMessage
+      message: userMessage,
+      chatInput: userMessage
     };
 
-    console.log('Enviando a n8n:', payload);
+    console.log('Enviando al chatbot:', payload);
 
-    const response = await fetch(N8N_CHAT_URL, {
+    const response = await fetch(N8N_WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     });
 
     const rawText = await response.text();
-    console.log('Respuesta cruda de n8n:', response.status, rawText);
+    console.log('Respuesta cruda del chatbot:', response.status, rawText);
 
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText} — ${rawText}`);
@@ -775,8 +881,8 @@ if (explicitOutputs.length) {
       addMessage('bot', botReply);
     } catch (error) {
       loadingMsg.remove();
-      addMessage('bot', 'No pude conectar con RÍO en este momento. Revisa que el webhook de n8n esté activo, en producción, y que permita CORS desde esta landing.');
-      console.error('Error conectando con n8n:', error);
+      addMessage('bot', 'No pude conectar con RÍO en este momento. Revisa que el webhook del chatbot esté activo, en producción, y que permita CORS desde esta landing.');
+      console.error('Error conectando con el chatbot:', error);
     } finally {
       sendBtn.disabled = false;
       inputEl.focus();
