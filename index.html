@@ -579,7 +579,7 @@
       <button class="nexo-modal-close" id="nexo-modal-close" aria-label="Cerrar">&times;</button>
     </div>
     <div class="nexo-chat" aria-label="Chat de diagnóstico Nexo">
-      <div class="nexo-chat-note">RÍO te hará una pregunta a la vez. Responde con naturalidad para recibir tu diagnóstico.</div>
+      <div class="nexo-chat-note">En NExo te hacemos una pregunta a la vez. Responde con naturalidad para recibir tu diagnóstico.</div>
       <div class="nexo-chat-messages" id="nexo-chat-messages"></div>
       <form class="nexo-chat-input" id="nexo-chat-form">
         <textarea id="nexo-chat-text" rows="1" placeholder="Escribe tu respuesta..." autocomplete="off"></textarea>
@@ -873,7 +873,7 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     inputEl.style.height = 'auto';
     sendBtn.disabled = true;
 
-    const loadingMsg = addMessage('bot', 'RÍO está analizando tu respuesta...', 'loading');
+    const loadingMsg = addMessage('bot', 'Estamos analizando tu respuesta...', 'loading');
 
     try {
       const data = await sendToN8N(userMessage);
