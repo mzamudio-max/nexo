@@ -19,6 +19,7 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: 'Inter', sans-serif; background: var(--nexo-night); color: var(--nexo-text); line-height: 1.6; }
 
+
   /* NAV */
   nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 4rem; border-bottom: 0.5px solid rgba(196,184,232,0.15); position: sticky; top: 0; background: var(--nexo-night); z-index: 100; }
   .logo-header { width: 120px; height: auto; display: block; }
@@ -28,12 +29,14 @@
   nav ul li a:hover { color: var(--nexo-lavender); }
   .nav-cta { background: var(--nexo-violet) !important; color: var(--nexo-near-white) !important; padding: 0.5rem 1.25rem; border-radius: 6px; font-weight: 500 !important; }
 
+
   /* SHARED */
   .section-label { font-size: 0.75rem; letter-spacing: 0.1em; color: var(--nexo-violet-light); text-transform: uppercase; margin-bottom: 1rem; }
   .section-title { font-size: 2rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.02em; margin-bottom: 0.75rem; }
   .section-sub { color: var(--nexo-muted); font-size: 0.95rem; margin-bottom: 3rem; max-width: 480px; line-height: 1.6; }
   .btn-cta { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--nexo-violet); color: white; padding: 0.9rem 2rem; border-radius: 8px; text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; border: none; transition: background 0.2s; font-family: 'Inter', sans-serif; }
   .btn-cta:hover { background: var(--nexo-violet-light); }
+
 
   /* HERO */
   .hero-wrapper { position: relative; overflow: hidden; }
@@ -46,10 +49,12 @@
   .hero p { font-size: 1.1rem; color: var(--nexo-muted); max-width: 560px; margin: 0 auto 2.5rem; font-weight: 300; }
   .hero-sub { display: block; margin-top: 1rem; font-size: 0.8rem; color: var(--nexo-muted); }
 
+
   /* STATS */
   .stats { display: flex; justify-content: center; gap: 5rem; padding: 3rem 4rem; border-top: 0.5px solid rgba(196,184,232,0.1); border-bottom: 0.5px solid rgba(196,184,232,0.1); margin: 0 4rem; }
   .stat-number { font-size: 2.2rem; font-weight: 500; color: var(--nexo-near-white); letter-spacing: -0.03em; }
   .stat-label { font-size: 0.8rem; color: var(--nexo-muted); margin-top: 0.25rem; max-width: 160px; line-height: 1.4; }
+
 
   /* PROCESO */
   .process-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); border-bottom: 0.5px solid rgba(196,184,232,0.1); }
@@ -65,6 +70,7 @@
   .process-cta { text-align: center; margin-top: 3rem; }
   .process-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
 
+
   /* DIAGNÓSTICO — qué evaluamos */
   .diag-section { padding: 6rem 4rem; }
   .diag-inner { max-width: 1100px; margin: 0 auto; }
@@ -76,6 +82,7 @@
   .eval-title { font-size: 1rem; font-weight: 500; color: var(--nexo-near-white); margin-bottom: 0.4rem; }
   .eval-desc { font-size: 0.83rem; color: var(--nexo-muted); line-height: 1.7; }
   .eval-detail { font-size: 0.75rem; color: rgba(155,146,184,0.55); margin-top: 0.6rem; font-style: italic; }
+
 
   /* NIVELES */
   .levels-section { padding: 5rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); }
@@ -92,6 +99,7 @@
   .levels-cta { text-align: center; margin-top: 3rem; }
   .levels-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
 
+
   /* PROFESIONES */
   .professions-section { padding: 5rem 4rem; border-top: 0.5px solid rgba(196,184,232,0.1); }
   .professions-inner { max-width: 1100px; margin: 0 auto; }
@@ -101,6 +109,7 @@
   .professions-note { font-size: 0.78rem; color: rgba(155,146,184,0.5); margin-bottom: 2.5rem; }
   .professions-cta { text-align: center; margin-top: 2.5rem; }
   .professions-cta p { font-size: 0.85rem; color: var(--nexo-muted); margin-bottom: 1.25rem; }
+
 
   /* EQUIPO — Quiénes somos */
   .team-section { padding: 6rem 4rem; border-top: 0.5px solid rgba(196,184,232,0.1); }
@@ -116,6 +125,7 @@
   .team-values span { flex: 1; text-align: center; padding: 1rem; font-size: 0.82rem; color: var(--nexo-muted); border-right: 0.5px solid rgba(196,184,232,0.12); }
   .team-values span:last-child { border-right: none; }
 
+
   /* VIDEO */
   .video-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); border-bottom: 0.5px solid rgba(196,184,232,0.1); }
   .video-inner { max-width: 900px; margin: 0 auto; text-align: center; }
@@ -123,6 +133,7 @@
   .video-frame video { width: 100%; height: 100%; object-fit: cover; display: block; }
   .video-placeholder { display: flex; flex-direction: column; align-items: center; gap: 0.75rem; color: var(--nexo-muted); font-size: 0.85rem; padding: 2rem; }
   .video-placeholder-icon { width: 56px; height: 56px; border-radius: 50%; background: rgba(107,79,187,0.2); border: 0.5px solid rgba(107,79,187,0.5); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; color: var(--nexo-lavender); }
+
 
   /* PLANES */
   .pricing-section { padding: 6rem 4rem; background: var(--nexo-soft); border-top: 0.5px solid rgba(196,184,232,0.1); }
@@ -145,13 +156,16 @@
   .pricing-card.featured .pricing-cta { background: var(--nexo-violet); border-color: var(--nexo-violet); color: white; }
   .pricing-card.featured .pricing-cta:hover { background: var(--nexo-violet-light); }
 
+
   /* FINAL CTA */
   .final-cta { text-align: center; padding: 7rem 4rem; max-width: 640px; margin: 0 auto; }
   .final-cta h2 { font-size: 2.5rem; font-weight: 300; color: var(--nexo-near-white); letter-spacing: -0.03em; margin-bottom: 1rem; line-height: 1.2; }
   .final-cta p { color: var(--nexo-muted); margin-bottom: 2.5rem; font-size: 0.95rem; }
 
+
   footer { border-top: 0.5px solid rgba(196,184,232,0.1); padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; }
   footer p { font-size: 0.8rem; color: var(--nexo-muted); }
+
 
   /* MODAL */
   .nexo-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(26,22,37,0.85); backdrop-filter: blur(6px); z-index: 9999; align-items: center; justify-content: center; }
@@ -177,6 +191,7 @@
   .nexo-chat-input button:hover { background: var(--nexo-violet-light); }
   .nexo-chat-input button:disabled { opacity: 0.55; cursor: not-allowed; }
   .nexo-chat-note { padding: 0.75rem 1rem 0; font-size: 0.75rem; color: rgba(155,146,184,0.7); }
+
 
   /* DIAGNÓSTICO VISUAL EN CHAT */
   .nexo-diagnosis-card { align-self: stretch; max-width: 100%; background: linear-gradient(160deg, rgba(107,79,187,0.22), rgba(45,37,64,0.95)); border: 0.5px solid rgba(196,184,232,0.22); border-radius: 18px; overflow: hidden; color: var(--nexo-text); box-shadow: 0 18px 48px rgba(0,0,0,0.22); }
@@ -205,87 +220,90 @@
   @media (max-width: 900px) {
     .team-grid { grid-template-columns: repeat(2,1fr); }
   }
-/* ============ RESPONSIVE ============ */
 
-/* Tablet: 1024px */
-@media (max-width: 1024px) {
-  nav { padding: 1.25rem 2rem; }
-  nav ul { gap: 1.5rem; }
-  .hero { padding: 5rem 2rem 4rem; }
-  .hero h1 { font-size: 2.75rem; }
-  .stats { margin: 0 2rem; padding: 2.5rem 2rem; gap: 2.5rem; }
-  .process-section, .diag-section, .levels-section, .professions-section,
-  .team-section, .video-section, .pricing-section { padding: 5rem 2rem; }
-  .final-cta { padding: 5rem 2rem; }
-  .process-grid { grid-template-columns: repeat(2,1fr); }
-  .eval-grid { grid-template-columns: repeat(2,1fr); }
-  .levels-grid { grid-template-columns: repeat(2,1fr); }
-  .pricing-grid { grid-template-columns: repeat(2,1fr); }
-  .pricing-grid .pricing-card:last-child { grid-column: span 2; }
-  footer { padding: 2rem; }
-}
+  /* ============ RESPONSIVE ============ */
 
-/* Mobile/tablet portrait: 768px */
-@media (max-width: 768px) {
-  nav { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.75rem; }
-  nav ul { gap: 1rem; flex-wrap: wrap; justify-content: flex-end; row-gap: 0.5rem; }
-  nav ul li a { font-size: 0.82rem; }
-  .logo-header { width: 90px; }
+  /* Tablet: 1024px */
+  @media (max-width: 1024px) {
+    nav { padding: 1.25rem 2rem; }
+    nav ul { gap: 1.5rem; }
+    .hero { padding: 5rem 2rem 4rem; }
+    .hero h1 { font-size: 2.75rem; }
+    .stats { margin: 0 2rem; padding: 2.5rem 2rem; gap: 2.5rem; }
+    .process-section, .diag-section, .levels-section, .professions-section,
+    .team-section, .video-section, .pricing-section { padding: 5rem 2rem; }
+    .final-cta { padding: 5rem 2rem; }
+    .process-grid { grid-template-columns: repeat(2,1fr); }
+    .eval-grid { grid-template-columns: repeat(2,1fr); }
+    .levels-grid { grid-template-columns: repeat(2,1fr); }
+    .pricing-grid { grid-template-columns: repeat(2,1fr); }
+    .pricing-grid .pricing-card:last-child { grid-column: span 2; }
+    footer { padding: 2rem; }
+  }
 
-  .hero { padding: 3.5rem 1.25rem 3rem; }
-  .hero-tag { font-size: 0.7rem; padding: 0.3rem 0.85rem; }
-  .hero h1 { font-size: 2.1rem; }
-  .hero p { font-size: 1rem; }
+  /* Mobile/tablet portrait: 768px */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.25rem; flex-wrap: wrap; gap: 0.75rem; }
+    nav ul { gap: 1rem; flex-wrap: wrap; justify-content: flex-end; row-gap: 0.5rem; }
+    nav ul li a { font-size: 0.82rem; }
+    .logo-header { width: 90px; }
 
-  .stats { flex-direction: column; align-items: center; gap: 1.75rem; margin: 0 1.25rem; padding: 2rem 1.25rem; }
+    .hero { padding: 3.5rem 1.25rem 3rem; }
+    .hero-tag { font-size: 0.7rem; padding: 0.3rem 0.85rem; }
+    .hero h1 { font-size: 2.1rem; }
+    .hero p { font-size: 1rem; }
 
-  .section-title { font-size: 1.5rem; }
-  .section-sub { max-width: 100%; margin-bottom: 2rem; }
+    .stats { flex-direction: column; align-items: center; gap: 1.75rem; margin: 0 1.25rem; padding: 2rem 1.25rem; }
 
-  .process-section, .diag-section, .levels-section, .professions-section,
-  .team-section, .video-section, .pricing-section { padding: 3.5rem 1.25rem; }
-  .final-cta { padding: 4rem 1.25rem; }
-  .final-cta h2 { font-size: 1.9rem; }
+    .section-title { font-size: 1.5rem; }
+    .section-sub { max-width: 100%; margin-bottom: 2rem; }
 
-  .process-grid { grid-template-columns: 1fr; }
-  .eval-grid { grid-template-columns: 1fr; }
-  .levels-grid { grid-template-columns: repeat(2,1fr); }
-  .team-grid { grid-template-columns: 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .pricing-grid .pricing-card:last-child { grid-column: auto; }
+    .process-section, .diag-section, .levels-section, .professions-section,
+    .team-section, .video-section, .pricing-section { padding: 3.5rem 1.25rem; }
+    .final-cta { padding: 4rem 1.25rem; }
+    .final-cta h2 { font-size: 1.9rem; }
 
-  .team-values { flex-wrap: wrap; }
-  .team-values span { flex: 1 1 50%; border-right: none; border-bottom: 0.5px solid rgba(196,184,232,0.12); }
+    .process-grid { grid-template-columns: 1fr; }
+    .eval-grid { grid-template-columns: 1fr; }
+    .levels-grid { grid-template-columns: repeat(2,1fr); }
+    .team-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .pricing-grid .pricing-card:last-child { grid-column: auto; }
 
-  footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.25rem; }
+    .team-values { flex-wrap: wrap; }
+    .team-values span { flex: 1 1 50%; border-right: none; border-bottom: 0.5px solid rgba(196,184,232,0.12); }
 
-  .nexo-modal { width: 100vw; height: 100dvh; border-radius: 0; }
-}
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.25rem; }
 
-/* Mobile: 480px */
-@media (max-width: 480px) {
-  nav ul li a:not(.nav-cta) { display: none; }
-  nav ul { gap: 0.75rem; }
-  .logo-header { width: 76px; }
+    .nexo-modal { width: 100vw; height: 100dvh; border-radius: 0; }
+  }
 
-  .hero h1 { font-size: 1.7rem; }
-  .hero p { font-size: 0.92rem; }
-  .btn-cta { width: 100%; justify-content: center; padding: 0.9rem 1.25rem; }
+  /* Mobile: 480px */
+  @media (max-width: 480px) {
+    nav ul li a:not(.nav-cta) { display: none; }
+    nav ul { gap: 0.75rem; }
+    .logo-header { width: 76px; }
 
-  .stat-number { font-size: 1.8rem; }
+    .hero h1 { font-size: 1.7rem; }
+    .hero p { font-size: 0.92rem; }
+    .btn-cta { width: 100%; justify-content: center; padding: 0.9rem 1.25rem; }
 
-  .levels-grid { grid-template-columns: 1fr; }
+    .stat-number { font-size: 1.8rem; }
 
-  .section-title { font-size: 1.3rem; }
+    .levels-grid { grid-template-columns: 1fr; }
 
-  .pricing-price { font-size: 2.2rem; }
+    .section-title { font-size: 1.3rem; }
 
-  .nexo-modal-title { font-size: 0.8rem; }
-  .nexo-chat-input button { padding: 0 0.9rem; }
-}
+    .pricing-price { font-size: 2.2rem; }
+
+    .nexo-modal-title { font-size: 0.8rem; }
+    .nexo-chat-input button { padding: 0 0.9rem; }
+  }
+
 </style>
 </head>
 <body>
+
 
 <!-- NAV -->
 <nav>
@@ -297,6 +315,7 @@
     <li><a href="#" class="nav-cta" id="btn-nav">Activar nexo</a></li>
   </ul>
 </nav>
+
 
 <!-- HERO -->
 <div class="hero-wrapper">
@@ -313,6 +332,7 @@
   </div>
 </div>
 
+
 <!-- STATS -->
 <div class="stats">
   <div class="stat-item">
@@ -328,6 +348,7 @@
     <div class="stat-label">herramientas que te digan, sin alarmismo, cómo te afecta a ti</div>
   </div>
 </div>
+
 
 <!-- EL PROCESO -->
 <div class="process-section" id="proceso">
@@ -368,6 +389,7 @@
   </div>
 </div>
 
+
 <!-- EL DIAGNÓSTICO — QUÉ EVALUAMOS -->
 <div class="diag-section" id="diagnostico">
   <div class="diag-inner">
@@ -407,6 +429,7 @@
   </div>
 </div>
 
+
 <!-- NIVELES DE RIESGO -->
 <div class="levels-section">
   <div class="levels-inner">
@@ -441,6 +464,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- PROFESIONES -->
 <div class="professions-section">
@@ -492,6 +516,7 @@
     </div>
   </div>
 </div>
+
 
 <!-- EQUIPO — QUIÉNES SOMOS -->
 <div class="team-section" id="equipo">
@@ -558,6 +583,7 @@
   </div>
 </div>
 
+
 <!-- VIDEO -->
 <div class="video-section" id="video">
   <div class="video-inner">
@@ -569,14 +595,10 @@
         <source src="Runway_timeline_export_ae33479c-a578-46f3-b4bf-bb3578bab077%20%281%29.mp4" type="video/mp4">
         Tu navegador no soporta la reproducción de video.
       </video>
-      </div>
-    <div class="professions-cta">
-      <p>Estas a un click de iniciar tu nuevo camino.</p>
-      <button class="btn-cta modal-trigger">Inicia tu diagnóstico →</button>
-    </div>
     </div>
   </div>
 </div>
+
 
 <!-- PLANES -->
 <div class="pricing-section" id="planes">
@@ -585,6 +607,7 @@
     <h2 class="section-title">Empieza gratis. Avanza cuando estés listo.</h2>
     <p class="section-sub">Sin permanencia. Sin compromisos. Cancela cuando quieras.</p>
     <div class="pricing-grid">
+
 
       <div class="pricing-card">
         <div class="pricing-plan">Gratuito</div>
@@ -598,6 +621,7 @@
         </ul>
         <button class="pricing-cta modal-trigger">Activar diagnóstico gratis →</button>
       </div>
+
 
       <div class="pricing-card featured">
         <div class="pricing-badge">Más popular</div>
@@ -614,6 +638,7 @@
         <button class="pricing-cta modal-trigger">Empezar por $5 →</button>
       </div>
 
+
       <div class="pricing-card">
         <div class="pricing-plan">Premium</div>
         <div class="pricing-price">$15 <span>/ mes</span></div>
@@ -623,14 +648,16 @@
           <li><strong>Alertas de IA personalizadas</strong> — noticias del sector filtradas para tu perfil</li>
           <li><strong>Conexión con portales de empleo</strong> — ofertas que encajan con tus skills en tiempo real</li>
           <li><strong>Monitor de demanda</strong> — detecta qué habilidades suben en tu industria</li>
-          <li>Prioridad en nuevas funcionalidades</li>
+          <li>Prioritad en nuevas funcionalidades</li>
         </ul>
         <button class="pricing-cta modal-trigger">Empezar por $15 →</button>
       </div>
 
+
     </div>
   </div>
 </div>
+
 
 <!-- FINAL CTA -->
 <div class="final-cta">
@@ -639,11 +666,13 @@
   <button class="btn-cta modal-trigger">Activar mi diagnóstico →</button>
 </div>
 
+
 <footer>
   <div><img src="nexo_logo_transparente_blanco.png" alt="nexo" style="height:80px;opacity:0.8;"></div>
   <p>MIB AIEx · Equipo 3 · Junio 2026</p>
   <p>Diagnóstico IA · Reskilling personalizado · Acompañamiento semanal</p>
 </footer>
+
 
 <!-- Modal -->
 <div class="nexo-modal-overlay" id="nexo-modal-overlay" role="dialog" aria-modal="true">
@@ -666,9 +695,11 @@
   </div>
 </div>
 
+
 <script>
   // Nuevo endpoint: chatbot (ya no es un n8n Chat Trigger, es un webhook estándar)
   const N8N_WEBHOOK_URL = 'https://equipo3aiexisdi.app.n8n.cloud/webhook/chatbot-nexo-perfil';
+
 
   const overlay = document.getElementById('nexo-modal-overlay');
   const messagesEl = document.getElementById('nexo-chat-messages');
@@ -676,8 +707,10 @@
   const inputEl = document.getElementById('nexo-chat-text');
   const sendBtn = document.getElementById('nexo-chat-send');
 
+
   const sessionId = getOrCreateSessionId();
   let hasStarted = false;
+
 
   function getOrCreateSessionId() {
     const key = 'nexo_rio_session_id';
@@ -689,10 +722,12 @@
     return id;
   }
 
+
   function openModal() {
     overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
     inputEl.focus();
+
 
     if (!hasStarted) {
       hasStarted = true;
@@ -700,10 +735,12 @@
     }
   }
 
+
   function closeModal() {
     overlay.classList.remove('open');
     document.body.style.overflow = '';
   }
+
 
   function escapeHTML(value) {
     return String(value || '')
@@ -714,9 +751,11 @@
       .replace(/'/g, '&#039;');
   }
 
+
   function isDiagnosis(text) {
     return /DIAGN[ÓO]STICO NEXO/i.test(text || '') && /Score de riesgo/i.test(text || '');
   }
+
 
   function extractSection(text, startLabel, endLabel) {
     const source = text || '';
@@ -728,6 +767,7 @@
     return (end >= 0 ? sliced.slice(0, end) : sliced).trim();
   }
 
+
   function buildDiagnosisCard(text) {
     const ocupacion = (text.match(/Ocupación:\s*([^\n]+)/i)?.[1] || 'Tu perfil').trim();
     const score = (text.match(/Score de riesgo:\s*(\d+)/i)?.[1] || '0').trim();
@@ -736,6 +776,7 @@
     const plan = extractSection(text, 'TU PLAN DE RESKILLING[\\s\\S]*?\\)', 'PRIMER PASO ESTA SEMANA');
     const primerPaso = extractSection(text, 'PRIMER PASO ESTA SEMANA', 'Este diagnóstico');
     const scoreNum = Math.max(0, Math.min(100, Number(score) || 0));
+
 
     return `
       <div class="nexo-diagnosis-head">
@@ -771,6 +812,7 @@
     `;
   }
 
+
   function addDiagnosisCard(text) {
     const card = document.createElement('div');
     card.className = 'nexo-diagnosis-card';
@@ -780,15 +822,21 @@
     return card;
   }
 
+
   const FINAL_DIAGNOSIS_MESSAGE = `🚀 Ya dimos el primer paso.
+
 
 Tu diagnóstico personalizado ya fue enviado al correo que nos compartiste.
 
+
 El diagnóstico te muestra dónde estás hoy. Pero tu siguiente movimiento es lo que puede cambiar tu ruta.
+
 
 Con Nexo Profesional puedes convertir ese diagnóstico en un plan vivo, con seguimiento semanal y recomendaciones personalizadas para avanzar paso a paso.
 
+
 Con el plan profesional tendrás:
+
 
 ✅ Una ruta de aprendizaje diseñada para tu perfil
 🤖 Acompañamiento semanal con IA
@@ -796,14 +844,18 @@ Con el plan profesional tendrás:
 📈 Seguimiento de tu avance
 🎯 Retos semanales para desarrollar habilidades clave
 
+
 Porque prepararte no debería ser algo que haces cuando ya es tarde.
 
+
 ¿Quieres conocer cómo sería tu plan profesional?`;
+
 
   function addMessage(type, text, extraClass = '') {
     if (type === 'bot' && isDiagnosis(text)) {
       text = FINAL_DIAGNOSIS_MESSAGE;
     }
+
 
     const msg = document.createElement('div');
     msg.className = `nexo-message ${type} ${extraClass}`.trim();
@@ -813,13 +865,16 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     return msg;
   }
 
+
   function safeParseN8NResponse(rawText) {
     if (!rawText) return {};
+
 
     // 1) JSON único normal
     try {
       return JSON.parse(rawText);
     } catch (_) {}
+
 
     // 2) El webhook puede devolver varios JSON pegados o en líneas:
     // {"type":"item","content":"Ho"}{"type":"item","content":"la"}{"type":"end"}
@@ -831,15 +886,18 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
       .map(line => line.startsWith('data:') ? line.slice(5).trim() : line)
       .join('\n');
 
+
     const parsed = [];
     let depth = 0;
     let inString = false;
     let escaped = false;
     let buffer = '';
 
+
     for (const ch of cleaned) {
       if (!buffer && ch !== '{' && ch !== '[') continue;
       buffer += ch;
+
 
       if (escaped) {
         escaped = false;
@@ -867,12 +925,15 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
       }
     }
 
+
     if (parsed.length) return parsed;
     return rawText;
   }
 
+
   function extractBotReply(data) {
     if (!data) return '';
+
 
     if (typeof data === 'string') {
       if (data.includes('"type"') || data.includes('"output"')) {
@@ -882,14 +943,17 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
       return data;
     }
 
+
     if (Array.isArray(data)) {
       const explicitOutputs = data
         .map(item => item?.output || item?.json?.output || item?.data?.output || item?.result?.output || '')
         .filter(Boolean);
 
+
       if (explicitOutputs.length) {
         return FINAL_DIAGNOSIS_MESSAGE;
       }
+
 
       const streamingText = data
         .filter(item => item && item.type === 'item' && typeof item.content === 'string')
@@ -897,8 +961,10 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
         .join('');
       if (streamingText) return streamingText;
 
+
       return data.map(item => extractBotReply(item)).filter(Boolean).join('');
     }
+
 
     return (
       data.output ||
@@ -915,6 +981,7 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     );
   }
 
+
   async function sendToN8N(userMessage) {
     const payload = {
       sessionId,
@@ -922,7 +989,9 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
       chatInput: userMessage
     };
 
+
     console.log('Enviando al chatbot:', payload);
+
 
     const response = await fetch(N8N_WEBHOOK_URL, {
       method: 'POST',
@@ -930,27 +999,34 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
       body: JSON.stringify(payload)
     });
 
+
     const rawText = await response.text();
     console.log('Respuesta cruda del chatbot:', response.status, rawText);
+
 
     if (!response.ok) {
       throw new Error(`Error ${response.status}: ${response.statusText} — ${rawText}`);
     }
 
+
     return safeParseN8NResponse(rawText);
   }
+
 
   formEl.addEventListener('submit', async (e) => {
     e.preventDefault();
     const userMessage = inputEl.value.trim();
     if (!userMessage) return;
 
+
     addMessage('user', userMessage);
     inputEl.value = '';
     inputEl.style.height = 'auto';
     sendBtn.disabled = true;
 
+
     const loadingMsg = addMessage('bot', 'Estamos analizando tu respuesta...', 'loading');
+
 
     try {
       const data = await sendToN8N(userMessage);
@@ -967,10 +1043,12 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     }
   });
 
+
   inputEl.addEventListener('input', () => {
     inputEl.style.height = 'auto';
     inputEl.style.height = `${Math.min(inputEl.scrollHeight, 120)}px`;
   });
+
 
   inputEl.addEventListener('keydown', (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -979,13 +1057,16 @@ Porque prepararte no debería ser algo que haces cuando ya es tarde.
     }
   });
 
+
   document.querySelectorAll('.modal-trigger, #btn-hero, #btn-nav').forEach(el => {
     el.addEventListener('click', (e) => { e.preventDefault(); openModal(); });
   });
 
+
   document.getElementById('nexo-modal-close').addEventListener('click', closeModal);
   overlay.addEventListener('click', (e) => { if (e.target === overlay) closeModal(); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
 
   document.querySelectorAll('a[href^="#"]').forEach(a => {
     a.addEventListener('click', (e) => {
