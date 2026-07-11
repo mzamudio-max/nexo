@@ -167,577 +167,86 @@
   footer p { font-size: 0.8rem; color: var(--nexo-muted); }
 
 
-  /* MODAL (legacy, ya no se usa - reemplazado por widget Carlos) */
-
-/* ===========================
-       Widget flotante Carlos
-       =========================== */
-    #nexo-carlos-launcher {
-      position: fixed;
-      right: 22px;
-      bottom: 22px;
-      z-index: 9998;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      cursor: pointer;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      font-family: inherit;
-    }
-
-    .launcher-label {
-      display: none;
-      background: var(--nexo-noche);
-      color: var(--nexo-blanco);
-      padding: 12px 16px;
-      border-radius: 999px;
-      box-shadow: 0 12px 34px rgba(26, 18, 52, 0.22);
-      font-size: 14px;
-      border: 1px solid rgba(184,178,245,0.28);
-    }
-
-    .launcher-avatar {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      overflow: hidden;
-      border: 4px solid var(--nexo-violeta);
-      background: var(--nexo-noche);
-      box-shadow: 0 0 0 8px rgba(108, 92, 231, 0.13), 0 14px 48px rgba(108, 92, 231, 0.45);
-      transition: transform 0.18s ease, box-shadow 0.18s ease;
-    }
-
-    .launcher-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    #nexo-carlos-launcher:hover .launcher-avatar {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 0 0 10px rgba(108, 92, 231, 0.18), 0 18px 54px rgba(108, 92, 231, 0.55);
-    }
-
-    #nexo-carlos-chat {
-      position: fixed;
-      right: 22px;
-      bottom: 128px;
-      z-index: 9999;
-      width: min(430px, calc(100vw - 28px));
-      height: min(680px, calc(100vh - 156px));
-      display: none;
-      flex-direction: column;
-      background: var(--nexo-blanco);
-      border-radius: var(--radius-xl);
-      overflow: hidden;
-      border: 1px solid rgba(108, 92, 231, 0.22);
-      box-shadow: var(--shadow);
-    }
-
-    #nexo-carlos-chat.is-open { display: flex; }
-
-    .chat-header {
-      background:
-        radial-gradient(circle at 90% 0%, rgba(108,92,231,0.6), transparent 34%),
-        var(--nexo-noche);
-      color: var(--nexo-blanco);
-      padding: 16px;
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .chat-header img {
-      width: 54px;
-      height: 54px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--nexo-lavanda);
-    }
-
-    .chat-title {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .chat-title strong {
-      display: block;
-      font-family: Arial, sans-serif;
-      font-size: 17px;
-      line-height: 1.2;
-    }
-
-    .chat-title small {
-      color: var(--nexo-lavanda);
-      display: block;
-      margin-top: 3px;
-      font-size: 12px;
-    }
-
-    .chat-actions {
-      display: flex;
-      gap: 6px;
-    }
-
-    .icon-btn {
-      border: 1px solid rgba(255,255,255,0.2);
-      background: rgba(255,255,255,0.08);
-      color: var(--nexo-blanco);
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 18px;
-      line-height: 1;
-    }
-
-    .chat-env {
-      background: var(--nexo-violeta-suave);
-      color: var(--nexo-noche);
-      padding: 8px 14px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      font-size: 12px;
-      border-bottom: 1px solid rgba(108,92,231,0.16);
-    }
-
-    .chat-env label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .chat-progress {
-      height: 5px;
-      background: rgba(108,92,231,0.14);
-    }
-
-    #progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, var(--nexo-violeta), var(--nexo-lavanda));
-      transition: width 0.25s ease;
-    }
-
-    #chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      padding: 16px;
-      background:
-        linear-gradient(rgba(248,247,255,0.78), rgba(248,247,255,0.78)),
-        var(--nexo-fondo);
-    }
-
-    .message {
-      display: flex;
-      margin: 0 0 12px;
-      gap: 8px;
-      align-items: flex-end;
-      animation: messageIn 0.16s ease-out;
-    }
-
-    @keyframes messageIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .message.bot { justify-content: flex-start; }
-    .message.user { justify-content: flex-end; }
-
-    .bubble {
-      max-width: 84%;
-      padding: 11px 13px;
-      border-radius: 16px;
-      line-height: 1.42;
-      font-size: 14px;
-      white-space: pre-wrap;
-    }
-
-    .bot .bubble {
-      color: var(--nexo-texto);
-      background: var(--nexo-blanco);
-      border: 1px solid rgba(108,92,231,0.12);
-      border-bottom-left-radius: 5px;
-      box-shadow: 0 6px 18px rgba(26, 18, 52, 0.06);
-    }
-
-    .user .bubble {
-      background: var(--nexo-violeta);
-      color: var(--nexo-blanco);
-      border-bottom-right-radius: 5px;
-    }
-
-    .quick-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 4px 0 14px 0;
-    }
-
-    .quick-actions button {
-      border: 1px solid rgba(108,92,231,0.24);
-      background: var(--nexo-blanco);
-      color: var(--nexo-violeta);
-      border-radius: 999px;
-      padding: 8px 10px;
-      cursor: pointer;
-      font-size: 12px;
-    }
-
-    .quick-actions button:hover {
-      background: var(--nexo-violeta-suave);
-    }
-
-    .typing {
-      display: inline-flex;
-      gap: 4px;
-      align-items: center;
-    }
-
-    .typing span {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--nexo-lavanda);
-      animation: typingDot 1s infinite ease-in-out;
-    }
-
-    .typing span:nth-child(2) { animation-delay: 0.12s; }
-    .typing span:nth-child(3) { animation-delay: 0.24s; }
-
-    @keyframes typingDot {
-      0%, 80%, 100% { opacity: 0.35; transform: translateY(0); }
-      40% { opacity: 1; transform: translateY(-2px); }
-    }
-
-    .chat-input {
-      background: var(--nexo-blanco);
-      border-top: 1px solid rgba(108,92,231,0.14);
-      padding: 12px;
-      display: flex;
-      gap: 8px;
-      align-items: flex-end;
-    }
-
-    #chat-input-field {
-      flex: 1;
-      resize: none;
-      max-height: 116px;
-      min-height: 42px;
-      border-radius: 14px;
-      border: 1px solid rgba(108,92,231,0.28);
-      padding: 11px 12px;
-      outline: none;
-      font-family: inherit;
-      font-size: 14px;
-      color: var(--nexo-texto);
-      background: var(--nexo-fondo);
-    }
-
-    #chat-input-field:focus {
-      border-color: var(--nexo-violeta);
-      box-shadow: 0 0 0 3px rgba(108,92,231,0.14);
-    }
-
-    #chat-send-btn {
-      border: 0;
-      background: var(--nexo-violeta);
-      color: var(--nexo-blanco);
-      height: 42px;
-      min-width: 78px;
-      padding: 0 14px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-    }
-
-    #chat-send-btn:disabled {
-      opacity: 0.55;
-      cursor: not-allowed;
-    }
-
-    .notice {
-      font-size: 11px;
-      color: var(--nexo-gris);
-      padding: 0 14px 10px;
-      background: var(--nexo-blanco);
-    }
-
-    .error-box {
-      background: var(--nexo-error-bg);
-      color: var(--nexo-error);
-      border: 1px solid rgba(153,60,29,0.16);
-      border-radius: 12px;
-      padding: 10px;
-      margin-top: 8px;
-      font-size: 13px;
-    }
-
-    @media (min-width: 760px) {
-      .launcher-label { display: block; }
-    }
-
-    @media (max-width: 520px) {
-      #nexo-carlos-chat {
-        right: 10px;
-        bottom: 112px;
-        height: min(660px, calc(100vh - 128px));
-      }
-      .launcher-avatar { width: 76px; height: 76px; }
-      #nexo-carlos-launcher { right: 14px; bottom: 16px; }
-    }
-  
-
-/* ============================================================
-   NEXO + Carlos · Versión legible profesional
-   - Conserva avatar flotante
-   - Panel blanco opaco
-   - Evita herencia visual de la landing oscura
-   - Hace que el chat sea legible sobre cualquier sección
-   ============================================================ */
-#nexo-carlos-launcher,
-#nexo-carlos-launcher *,
-#nexo-carlos-chat,
-#nexo-carlos-chat * {
-  box-sizing: border-box !important;
+  /* Widget Carlos - NLP v3.2 corregido */
+<style id="nexo-carlos-widget-css">
+:root {
+  --nexo-noche: #1A1234;
+  --nexo-violeta: #6C5CE7;
+  --nexo-lavanda: #B8B2F5;
+  --nexo-violeta-suave: #EAE8FF;
+  --nexo-fondo: #F8F7FF;
+  --nexo-blanco: #FFFFFF;
+  --nexo-texto: #2B2545;
+  --nexo-gris: #888888;
+  --nexo-error: #993C1D;
+  --nexo-error-bg: #FAECE7;
+  --shadow: 0 22px 70px rgba(26, 18, 52, 0.28);
+  --radius-xl: 24px;
 }
-
+#nexo-carlos-launcher, #nexo-carlos-launcher *, #nexo-carlos-chat, #nexo-carlos-chat * { box-sizing: border-box !important; }
 #nexo-carlos-launcher {
-  right: 28px !important;
-  bottom: 26px !important;
-  z-index: 2147483646 !important;
-  gap: 14px !important;
+  position: fixed; right: 28px; bottom: 26px; z-index: 2147483646;
+  display: flex; align-items: center; gap: 14px; cursor: pointer; border: 0; background: transparent; padding: 0;
+  font-family: Calibri, "Trebuchet MS", Arial, sans-serif;
 }
-
 #nexo-carlos-launcher .launcher-label {
-  display: block !important;
-  background: #FFFFFF !important;
-  color: #1A1234 !important;
-  border: 1px solid rgba(108,92,231,0.28) !important;
-  box-shadow: 0 14px 38px rgba(10, 6, 25, 0.30) !important;
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  padding: 13px 18px !important;
-  border-radius: 999px !important;
-  line-height: 1 !important;
-  white-space: nowrap !important;
+  display: block; background: #FFFFFF; color: #1A1234; border: 1px solid rgba(108,92,231,0.28);
+  box-shadow: 0 14px 38px rgba(10, 6, 25, 0.30); font-size: 15px; font-weight: 700;
+  padding: 13px 18px; border-radius: 999px; line-height: 1; white-space: nowrap;
 }
-
 #nexo-carlos-launcher .launcher-avatar {
-  width: 92px !important;
-  height: 92px !important;
-  border: 4px solid #6C5CE7 !important;
-  background: #1A1234 !important;
-  box-shadow:
-    0 0 0 9px rgba(108, 92, 231, 0.22),
-    0 18px 54px rgba(108, 92, 231, 0.55),
-    0 20px 70px rgba(0, 0, 0, 0.42) !important;
+  width: 92px; height: 92px; border-radius: 50%; overflow: hidden; border: 4px solid #6C5CE7; background: #1A1234;
+  box-shadow: 0 0 0 9px rgba(108, 92, 231, 0.22), 0 18px 54px rgba(108, 92, 231, 0.55), 0 20px 70px rgba(0, 0, 0, 0.42);
 }
-
-#nexo-carlos-launcher .launcher-avatar img,
-#nexo-carlos-chat .chat-header img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  display: block !important;
-}
-
+#nexo-carlos-launcher .launcher-avatar img, #nexo-carlos-chat .chat-header img { width: 100%; height: 100%; object-fit: cover; display: block; }
 #nexo-carlos-chat {
-  position: fixed !important;
-  top: 92px !important;
-  right: 28px !important;
-  bottom: 136px !important;
-  width: min(520px, calc(100vw - 40px)) !important;
-  height: auto !important;
-  max-height: calc(100vh - 170px) !important;
-  z-index: 2147483647 !important;
-  background: #FFFFFF !important;
-  color: #2B2545 !important;
-  border: 1px solid rgba(108,92,231,0.26) !important;
-  border-radius: 26px !important;
-  overflow: hidden !important;
-  box-shadow:
-    0 30px 90px rgba(0,0,0,0.48),
-    0 0 0 1px rgba(255,255,255,0.60) inset !important;
-  opacity: 1 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  font-family: Calibri, "Trebuchet MS", Arial, sans-serif !important;
+  position: fixed; top: 92px; right: 28px; bottom: 136px; width: min(520px, calc(100vw - 40px)); height: auto;
+  max-height: calc(100vh - 170px); z-index: 2147483647; display: none; flex-direction: column;
+  background: #FFFFFF; color: #2B2545; border: 1px solid rgba(108,92,231,0.26); border-radius: 26px; overflow: hidden;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.48), 0 0 0 1px rgba(255,255,255,0.60) inset;
+  font-family: Calibri, "Trebuchet MS", Arial, sans-serif;
 }
-
-#nexo-carlos-chat .chat-header {
-  min-height: 86px !important;
-  padding: 18px 18px !important;
-  background:
-    radial-gradient(circle at 96% 4%, rgba(108,92,231,0.55), transparent 36%),
-    linear-gradient(135deg, #1A1234 0%, #261A4D 100%) !important;
-  color: #FFFFFF !important;
-}
-
-#nexo-carlos-chat .chat-header img {
-  width: 58px !important;
-  height: 58px !important;
-  border: 2px solid #B8B2F5 !important;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.28) !important;
-}
-
-#nexo-carlos-chat .chat-title strong {
-  color: #FFFFFF !important;
-  font-size: 22px !important;
-  font-weight: 800 !important;
-  letter-spacing: -0.01em !important;
-}
-
-#nexo-carlos-chat .chat-title small {
-  color: #D8D3FF !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-}
-
-#nexo-carlos-chat .icon-btn {
-  width: 40px !important;
-  height: 40px !important;
-  color: #FFFFFF !important;
-  background: rgba(255,255,255,0.13) !important;
-  border: 1px solid rgba(255,255,255,0.32) !important;
-  font-size: 20px !important;
-}
-
-#nexo-carlos-chat .chat-env {
-  background: #F1EFFF !important;
-  color: #1A1234 !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  padding: 11px 18px !important;
-  border-bottom: 1px solid rgba(108,92,231,0.20) !important;
-}
-
-#nexo-carlos-chat .chat-progress {
-  height: 6px !important;
-  background: #E7E3FF !important;
-}
-
-#nexo-carlos-chat #progress-bar {
-  background: linear-gradient(90deg, #6C5CE7, #B8B2F5) !important;
-}
-
-#nexo-carlos-chat #chat-messages {
-  background: #F8F7FF !important;
-  color: #2B2545 !important;
-  padding: 18px !important;
-  opacity: 1 !important;
-}
-
-#nexo-carlos-chat .bubble {
-  max-width: 88% !important;
-  font-size: 15px !important;
-  line-height: 1.5 !important;
-  padding: 13px 15px !important;
-  border-radius: 18px !important;
-  word-break: normal !important;
-  overflow-wrap: break-word !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-#nexo-carlos-chat .bot .bubble {
-  background: #FFFFFF !important;
-  color: #2B2545 !important;
-  border: 1px solid rgba(108,92,231,0.16) !important;
-  box-shadow: 0 8px 22px rgba(26,18,52,0.08) !important;
-}
-
-#nexo-carlos-chat .user .bubble {
-  background: #6C5CE7 !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(108,92,231,0.30) !important;
-}
-
-#nexo-carlos-chat .quick-actions button {
-  background: #FFFFFF !important;
-  color: #5D4BD8 !important;
-  border: 1px solid rgba(108,92,231,0.30) !important;
-  font-size: 13px !important;
-  font-weight: 700 !important;
-  padding: 9px 12px !important;
-}
-
-#nexo-carlos-chat .quick-actions button:hover {
-  background: #EAE8FF !important;
-}
-
-#nexo-carlos-chat .chat-input {
-  background: #FFFFFF !important;
-  border-top: 1px solid rgba(108,92,231,0.16) !important;
-  padding: 14px 16px !important;
-}
-
-#nexo-carlos-chat #chat-input-field {
-  background: #FFFFFF !important;
-  color: #2B2545 !important;
-  border: 1px solid rgba(108,92,231,0.36) !important;
-  min-height: 48px !important;
-  font-size: 15px !important;
-  border-radius: 16px !important;
-}
-
-#nexo-carlos-chat #chat-input-field::placeholder {
-  color: #777088 !important;
-  opacity: 1 !important;
-}
-
-#nexo-carlos-chat #chat-send-btn {
-  min-width: 88px !important;
-  height: 48px !important;
-  background: #6C5CE7 !important;
-  color: #FFFFFF !important;
-  border-radius: 16px !important;
-  font-size: 15px !important;
-  font-weight: 800 !important;
-}
-
-#nexo-carlos-chat #chat-send-btn:hover {
-  background: #5D4BD8 !important;
-}
-
-#nexo-carlos-chat .notice {
-  background: #FFFFFF !important;
-  color: #5F5874 !important;
-  font-size: 12px !important;
-  line-height: 1.35 !important;
-  padding: 0 16px 14px !important;
-}
-
+#nexo-carlos-chat.is-open { display: flex; }
+#nexo-carlos-chat .chat-header { min-height: 86px; padding: 18px; background: radial-gradient(circle at 96% 4%, rgba(108,92,231,0.55), transparent 36%), linear-gradient(135deg, #1A1234 0%, #261A4D 100%); color: #FFFFFF; display: flex; gap: 12px; align-items: center; }
+#nexo-carlos-chat .chat-header img { width: 58px; height: 58px; border-radius: 50%; border: 2px solid #B8B2F5; box-shadow: 0 8px 22px rgba(0,0,0,0.28); }
+#nexo-carlos-chat .chat-title { flex: 1; min-width: 0; }
+#nexo-carlos-chat .chat-title strong { color: #FFFFFF; font-size: 22px; font-weight: 800; letter-spacing: -0.01em; display: block; line-height: 1.2; }
+#nexo-carlos-chat .chat-title small { color: #D8D3FF; font-size: 13px; font-weight: 600; display: block; margin-top: 3px; }
+#nexo-carlos-chat .chat-actions { display: flex; gap: 6px; }
+#nexo-carlos-chat .icon-btn { width: 40px; height: 40px; color: #FFFFFF; background: rgba(255,255,255,0.13); border: 1px solid rgba(255,255,255,0.32); border-radius: 50%; cursor: pointer; font-size: 20px; line-height: 1; }
+#nexo-carlos-chat .chat-env { background: #F1EFFF; color: #1A1234; font-size: 13px; font-weight: 700; padding: 11px 18px; border-bottom: 1px solid rgba(108,92,231,0.20); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+#nexo-carlos-chat .chat-env label { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; white-space: nowrap; }
+#nexo-carlos-chat .chat-progress { height: 6px; background: #E7E3FF; }
+#nexo-carlos-chat #progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #6C5CE7, #B8B2F5); transition: width 0.25s ease; }
+#nexo-carlos-chat #chat-messages { flex: 1; overflow-y: auto; padding: 18px; background: #F8F7FF; color: #2B2545; }
+#nexo-carlos-chat .message { display: flex; margin: 0 0 12px; gap: 8px; align-items: flex-end; animation: messageIn 0.16s ease-out; }
+@keyframes messageIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+#nexo-carlos-chat .message.bot { justify-content: flex-start; }
+#nexo-carlos-chat .message.user { justify-content: flex-end; }
+#nexo-carlos-chat .bubble { max-width: 88%; font-size: 15px; line-height: 1.5; padding: 13px 15px; border-radius: 18px; white-space: pre-wrap; word-break: normal; overflow-wrap: break-word; }
+#nexo-carlos-chat .bot .bubble { background: #FFFFFF; color: #2B2545; border: 1px solid rgba(108,92,231,0.16); box-shadow: 0 8px 22px rgba(26,18,52,0.08); border-bottom-left-radius: 5px; }
+#nexo-carlos-chat .user .bubble { background: #6C5CE7; color: #FFFFFF; border: 1px solid rgba(108,92,231,0.30); border-bottom-right-radius: 5px; }
+#nexo-carlos-chat .quick-actions { display: flex; flex-wrap: wrap; gap: 8px; margin: -4px 0 14px 0; padding-left: 0; width: 100%; clear: both; }
+#nexo-carlos-chat .quick-actions button { background: #FFFFFF; color: #5D4BD8; border: 1px solid rgba(108,92,231,0.30); font-size: 13px; font-weight: 700; padding: 9px 12px; border-radius: 999px; cursor: pointer; }
+#nexo-carlos-chat .quick-actions button:hover { background: #EAE8FF; }
+#nexo-carlos-chat .typing { display: inline-flex; gap: 4px; align-items: center; }
+#nexo-carlos-chat .typing span { width: 6px; height: 6px; border-radius: 50%; background: #B8B2F5; animation: typingDot 1s infinite ease-in-out; }
+#nexo-carlos-chat .typing span:nth-child(2) { animation-delay: 0.12s; } #nexo-carlos-chat .typing span:nth-child(3) { animation-delay: 0.24s; }
+@keyframes typingDot { 0%, 80%, 100% { opacity: 0.35; transform: translateY(0); } 40% { opacity: 1; transform: translateY(-2px); } }
+#nexo-carlos-chat .chat-input { background: #FFFFFF; border-top: 1px solid rgba(108,92,231,0.16); padding: 14px 16px; display: flex; gap: 8px; align-items: flex-end; }
+#nexo-carlos-chat #chat-input-field { flex: 1; resize: none; max-height: 116px; min-height: 48px; border-radius: 16px; border: 1px solid rgba(108,92,231,0.36); padding: 11px 12px; outline: none; font-family: inherit; font-size: 15px; color: #2B2545; background: #FFFFFF; }
+#nexo-carlos-chat #chat-input-field:focus { border-color: #6C5CE7; box-shadow: 0 0 0 3px rgba(108,92,231,0.14); }
+#nexo-carlos-chat #chat-input-field::placeholder { color: #777088; opacity: 1; }
+#nexo-carlos-chat #chat-send-btn { min-width: 88px; height: 48px; background: #6C5CE7; color: #FFFFFF; border: 0; border-radius: 16px; font-size: 15px; font-weight: 800; cursor: pointer; font-family: Arial, sans-serif; }
+#nexo-carlos-chat #chat-send-btn:disabled { opacity: 0.55; cursor: not-allowed; }
+#nexo-carlos-chat .notice { background: #FFFFFF; color: #5F5874; font-size: 12px; line-height: 1.35; padding: 0 16px 14px; }
 @media (max-width: 760px) {
-  #nexo-carlos-chat {
-    top: 72px !important;
-    right: 12px !important;
-    bottom: 112px !important;
-    width: calc(100vw - 24px) !important;
-    max-height: calc(100vh - 132px) !important;
-    border-radius: 22px !important;
-  }
-  #nexo-carlos-launcher {
-    right: 14px !important;
-    bottom: 16px !important;
-  }
-  #nexo-carlos-launcher .launcher-label {
-    display: none !important;
-  }
-  #nexo-carlos-launcher .launcher-avatar {
-    width: 78px !important;
-    height: 78px !important;
-  }
+  #nexo-carlos-chat { top: 72px; right: 12px; bottom: 112px; width: calc(100vw - 24px); max-height: calc(100vh - 132px); border-radius: 22px; }
+  #nexo-carlos-launcher { right: 14px; bottom: 16px; }
+  #nexo-carlos-launcher .launcher-label { display: none; }
+  #nexo-carlos-launcher .launcher-avatar { width: 78px; height: 78px; }
 }
-
+</style>
 
   /* DIAGNÓSTICO VISUAL EN CHAT */
   .nexo-diagnosis-card { align-self: stretch; max-width: 100%; background: linear-gradient(160deg, rgba(107,79,187,0.22), rgba(45,37,64,0.95)); border: 0.5px solid rgba(196,184,232,0.22); border-radius: 18px; overflow: hidden; color: var(--nexo-text); box-shadow: 0 18px 48px rgba(0,0,0,0.22); }
@@ -1220,62 +729,88 @@
 </footer>
 
 
-<!-- Chatbot Carlos integrado · versión legible profesional -->
-<!-- Launcher flotante -->
-  <button id="nexo-carlos-launcher" type="button" aria-label="Abrir chat con Carlos">
-    <span class="launcher-label">Habla con Carlos</span>
-    <span class="launcher-avatar">
-      <img src="carlos_avatar.png" alt="Avatar de Carlos, orientador profesional de nexo" />
-    </span>
-  </button>
-
-  <!-- Chat flotante -->
-  <section id="nexo-carlos-chat" aria-live="polite" aria-label="Chat Carlos nexo">
-    <header class="chat-header">
-      <img src="carlos_avatar.png" alt="Avatar de Carlos" />
-      <div class="chat-title">
-        <strong>Carlos</strong>
-        <small>Orientador Profesional · nexo</small>
-      </div>
-      <div class="chat-actions">
-        <button class="icon-btn" id="chat-reset-btn" type="button" title="Reiniciar conversación">↻</button>
-        <button class="icon-btn" id="chat-close-btn" type="button" title="Cerrar chat">×</button>
-      </div>
-    </header>
-
-    <div class="chat-env">
-      <span id="step-indicator">Pregunta 1 de 9</span>
-      <label title="Si está desmarcado usa webhook de test; si está marcado usa webhook de producción.">
-        <input type="checkbox" id="prod-toggle" />
-        Producción
-      </label>
+<!-- Chatbot Carlos integrado · NLP v3.2 corregido -->
+<button id="nexo-carlos-launcher" type="button" aria-label="Abrir chat con Carlos">
+  <span class="launcher-label">Habla con Carlos</span>
+  <span class="launcher-avatar"><img src="carlos_avatar.png" alt="Avatar de Carlos, orientador profesional de nexo" /></span>
+</button>
+<section id="nexo-carlos-chat" aria-live="polite" aria-label="Chat Carlos nexo">
+  <header class="chat-header">
+    <img src="carlos_avatar.png" alt="Avatar de Carlos" />
+    <div class="chat-title"><strong>Carlos</strong><small>Orientador Profesional · nexo</small></div>
+    <div class="chat-actions">
+      <button class="icon-btn" id="chat-reset-btn" type="button" title="Reiniciar conversación">↻</button>
+      <button class="icon-btn" id="chat-close-btn" type="button" title="Cerrar chat">×</button>
     </div>
+  </header>
+  <div class="chat-env">
+    <span id="step-indicator">Pregunta 1 de 9</span>
+    <label title="Si está desmarcado usa webhook de test; si está marcado usa webhook de producción."><input type="checkbox" id="prod-toggle" /> Producción</label>
+  </div>
+  <div class="chat-progress"><div id="progress-bar"></div></div>
+  <div id="chat-messages"></div>
+  <form class="chat-input" id="chat-form">
+    <textarea id="chat-input-field" rows="1" placeholder="Escribe aquí..."></textarea>
+    <button id="chat-send-btn" type="submit">Enviar</button>
+  </form>
+  <div class="notice">El informe se genera automáticamente con IA. El índice es una recomendación orientativa, no una decisión sobre tu situación laboral.</div>
+</section>
 
-    <div class="chat-progress"><div id="progress-bar"></div></div>
 
-    <div id="chat-messages"></div>
 
-    <form class="chat-input" id="chat-form">
-      <textarea id="chat-input-field" rows="1" placeholder="Escribe aquí..."></textarea>
-      <button id="chat-send-btn" type="submit">Enviar</button>
-    </form>
-    <div class="notice">El informe se genera automáticamente con IA. El índice es una recomendación orientativa, no una decisión sobre tu situación laboral.</div>
-  </section>
+
+
 <script>
-    /**************************************************************
-     * CONFIGURACIÓN N8N
-     * - TEST: URL de webhook-test para ejecuciones manuales en n8n.
-     * - PROD: URL de webhook productivo con workflow activo.
-     **************************************************************/
-    const N8N_WEBHOOK_TEST = "https://equipo3aiexisdi.app.n8n.cloud/webhook-test/chatbot-nexo-perfil";
-    const N8N_WEBHOOK_PROD = "https://equipo3aiexisdi.app.n8n.cloud/webhook/chatbot-nexo-perfil";
+document.addEventListener('DOMContentLoaded', function () {
+  function openCarlosFromCTA(event) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
+    }
+    if (typeof openChat === 'function') {
+      openChat();
+      return false;
+    }
+    var launcher = document.getElementById('nexo-carlos-launcher');
+    if (launcher) launcher.click();
+    return false;
+  }
 
-    /**************************************************************
-     * PROMPT OPERATIVO DE CARLOS
-     * Esta constante documenta el comportamiento esperado del avatar.
-     * La entrevista es guiada por código en esta POC.
-     **************************************************************/
-    const CARLOS_PROMPT = `
+  document.querySelectorAll('#btn-nav,#btn-hero,.modal-trigger,.pricing-cta').forEach(function (el) {
+    el.addEventListener('click', openCarlosFromCTA, true);
+    el.setAttribute('aria-label', 'Abrir chat con Carlos');
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (event) {
+      var id = a.getAttribute('href');
+      if (!id || id === '#') return;
+      var target = document.querySelector(id);
+      if (target) {
+        event.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+});
+</script>
+
+<script>
+/**************************************************************
+ * Chatbot Carlos · NLP v3.2 corregido
+ * Cambios clave:
+ * - Quick actions siempre debajo de la pregunta mediante DOM real.
+ * - Sector declarado por el usuario tiene prioridad sobre keywords de herramientas IA.
+ * - Manufactura/Fabricacion prioritaria frente a Marketing/Tecnologia si aparece explicitamente.
+ * - Correccion de negaciones: "No gestiono equipo" no activa gestiona_equipo.
+ * - Extraccion avanzada de anos de experiencia y tiempo formacion.
+ * - Deteccion de mensajes fuera de alcance sin avanzar el flujo.
+ **************************************************************/
+const N8N_WEBHOOK_TEST = "https://equipo3aiexisdi.app.n8n.cloud/webhook-test/chatbot-nexo-perfil";
+const N8N_WEBHOOK_PROD = "https://equipo3aiexisdi.app.n8n.cloud/webhook/chatbot-nexo-perfil";
+
+const CARLOS_PROMPT = `
 Eres Carlos, orientador profesional de nexo.
 Tu misión es hacer preguntas claras, entender el perfil profesional, detectar habilidades transferibles y preparar un payload normalizado para n8n.
 Hablas de tú, en español, con tono humano, directo y no alarmista.
@@ -1284,474 +819,422 @@ Usa: ruta, tramo, habilidades transferibles, siguiente movimiento, plan concreto
 Haz máximo 8-10 preguntas y termina cada mensaje con una acción o pregunta concreta.
 `;
 
-    /**************************************************************
-     * PREGUNTAS DE LA ENTREVISTA
-     **************************************************************/
-    const QUESTIONS = [
-      {
-        id: "p0",
-        field: "tareas_principales",
-        text: "Hola, soy Carlos.\n\nSeré tu orientador profesional en nexo y voy a ayudarte a identificar las habilidades que ya te aportan valor y las que pueden reforzar tu siguiente movimiento profesional.\n\nPara empezar: ¿a qué te dedicas y qué tareas ocupan la mayor parte de tu día? Cuéntamelo con tus palabras."
-      },
-      {
-        id: "p1",
-        field: "tarea_mas_tiempo",
-        text: "¿Qué tarea te lleva más tiempo a la semana?"
-      },
-      {
-        id: "p2",
-        field: "mecanica_criterio",
-        text: "¿Cuáles son las partes más mecánicas de tu trabajo? ¿Y cuáles requieren más tu criterio personal?"
-      },
-      {
-        id: "p3",
-        field: "sector_empresa_ia",
-        text: "¿En qué sector y tipo de empresa trabajas? ¿Ya utilizan IA o han cambiado algunos procesos recientemente?"
-      },
-      {
-        id: "p4",
-        field: "gestion_experiencia",
-        text: "¿Gestionas personas o proyectos? ¿Cuántos años llevas trabajando en esta área?"
-      },
-      {
-        id: "p5",
-        field: "herramientas_ia",
-        text: "¿Qué herramientas digitales utilizas habitualmente? ¿Has probado ChatGPT, Copilot u otras herramientas de IA para alguna tarea laboral?"
-      },
-      {
-        id: "p6",
-        field: "estado_tiempo",
-        text: "¿Estás trabajando actualmente o estás buscando nuevas oportunidades? ¿Cuántas horas a la semana podrías dedicar a aprender algo nuevo?"
-      },
-      {
-        id: "p7",
-        field: "especializacion_unica_texto",
-        text: "¿Hay alguna parte de tu experiencia que consideres especialmente difícil de replicar? Por ejemplo, conocimiento del negocio, criterio técnico, gestión de personas, relación con clientes o toma de decisiones."
-      },
-      {
-        id: "p8",
-        field: "email_destino",
-        expectsEmail: true,
-        text: "Perfecto.\n\nYa he normalizado toda tu información y dispongo de los datos necesarios para elaborar tu informe personalizado.\n\nAhora necesito una dirección de correo electrónico donde quieras recibirlo.\n\n¿A qué cuenta de mail te lo envío?"
-      }
-    ];
+const QUESTIONS = [
+  { id: "p0", field: "tareas_principales", text: "Hola, soy Carlos.\n\nSeré tu orientador profesional en nexo y voy a ayudarte a identificar las habilidades que ya te aportan valor y las que pueden reforzar tu siguiente movimiento profesional.\n\nPara empezar: ¿a qué te dedicas y qué tareas ocupan la mayor parte de tu día? Cuéntamelo con tus palabras." },
+  { id: "p1", field: "tarea_mas_tiempo", text: "¿Qué tarea te lleva más tiempo a la semana?" },
+  { id: "p2", field: "mecanica_criterio", text: "¿Cuáles son las partes más mecánicas de tu trabajo? ¿Y cuáles requieren más tu criterio personal?" },
+  { id: "p3", field: "sector_empresa_ia", text: "¿En qué sector y tipo de empresa trabajas? ¿Ya utilizan IA o han cambiado procesos recientemente? Si puedes, incluye también tus años aproximados de experiencia." },
+  { id: "p4", field: "gestion_experiencia", text: "¿Gestionas personas o proyectos?" },
+  { id: "p5", field: "herramientas_ia", text: "¿Qué herramientas digitales utilizas habitualmente? ¿Has probado ChatGPT, Copilot u otras herramientas de IA para alguna tarea laboral?" },
+  { id: "p6", field: "estado_tiempo", text: "¿Estás trabajando actualmente o estás buscando nuevas oportunidades? ¿Cuántas horas a la semana podrías dedicar a aprender algo nuevo?" },
+  { id: "p7", field: "especializacion_unica_texto", text: "¿Hay alguna parte de tu experiencia que consideres especialmente difícil de replicar? Por ejemplo, conocimiento del negocio, criterio técnico, gestión de personas, relación con clientes o toma de decisiones." },
+  { id: "p8", field: "email_destino", expectsEmail: true, text: "Perfecto.\n\nYa he normalizado toda tu información y dispongo de los datos necesarios para elaborar tu informe personalizado.\n\nAhora necesito una dirección de correo electrónico donde quieras recibirlo.\n\n¿A qué cuenta de mail te lo envío?" }
+];
 
-    const SECTOR_RULES = [
-      { sector: "finanzas", rx: /(banca|finanza|financiero|contabilidad|auditor[ií]a|seguros|riesgo|compliance|tesorer[ií]a|control de gesti[oó]n)/i },
-      { sector: "tecnologia", rx: /(tecnolog[ií]a|it|sistemas|software|datos|data|programaci[oó]n|devops|cloud|ciberseguridad|arquitectura|desarrollo|product owner|product manager)/i },
-      { sector: "servicio_cliente", rx: /(atenci[oó]n al cliente|servicio al cliente|call center|contact center|soporte|customer|cx|experiencia del cliente|ventas|account manager)/i },
-      { sector: "marketing", rx: /(marketing|comunicaci[oó]n|marca|branding|publicidad|contenidos|redes sociales|campañas|campana|engagement|seo|sem|producto)/i },
-      { sector: "manufactura", rx: /(manufactura|producci[oó]n|f[aá]brica|industrial|calidad|log[ií]stica|planta|mantenimiento|operaciones|supply chain)/i },
-      { sector: "educacion", rx: /(educaci[oó]n|docencia|profesor|formaci[oó]n|capacitaci[oó]n|e-learning|elearning|edtech|aprendizaje|instructor)/i },
-      { sector: "administrativo", rx: /(administrativo|administraci[oó]n|backoffice|oficina|documentos|rrhh|recursos humanos|gesti[oó]n documental|secretar[ií]a|asistente)/i }
-    ];
+const OCCUPATION_RULES = [
+  { occupation: "Responsable de Operaciones", isco: "1219", sector: "manufactura", rx: /(responsable|jefe|jefa|manager|coordinador|coordinadora).{0,35}(operaciones|produccion|fabricacion|planta)|operations manager/ },
+  { occupation: "Planificador/a de Producción", isco: "2141", sector: "manufactura", rx: /(cuadrante|turnos|calendarios|planificacion|planificador).{0,40}(turnos|produccion|planta|operaciones|calendarios)|asignacion de calendarios/ },
+  { occupation: "Ingeniero/a de producción", isco: "2141", sector: "manufactura", rx: /(ingeniero|ingeniera).{0,35}(produccion|industrial|procesos)|produccion industrial/ },
+  { occupation: "Técnico/a mantenimiento industrial", isco: "7233", sector: "manufactura", rx: /(mantenimiento industrial|tecnico de mantenimiento|técnico de mantenimiento)/ },
+  { occupation: "Operario/a almacén / Logística", isco: "4321", sector: "logistica", rx: /(almacen|almacén|logistica|logística|supply chain|transporte|reparto|mrw|operario de almacen)/ },
+  { occupation: "Gestor/a de proyectos", isco: "1219", sector: "tecnologia", rx: /(jefe|jefa|gestor|gestora|coordinador|coordinadora|project manager).{0,35}(proyecto|proyectos)|gestion de proyectos|gestión de proyectos/ },
+  { occupation: "Técnico/a soporte IT", isco: "3512", sector: "tecnologia", rx: /(soporte it|helpdesk|sistemas|administrador de sistemas|infraestructura it)/ },
+  { occupation: "Desarrollador/a software junior", isco: "2512", sector: "tecnologia", rx: /(desarrollador|desarrolladora|programador|programadora|software|frontend|backend|fullstack)/ },
+  { occupation: "Analista de datos", isco: "2120", sector: "tecnologia", rx: /(analista de datos|data analyst|business intelligence|power bi|dashboard|cuadros de mando)/ },
+  { occupation: "Analista marketing digital", isco: "2431", sector: "marketing", rx: /(marketing digital|seo|sem|google ads|meta ads|performance marketing|email marketing)/ },
+  { occupation: "Community manager", isco: "2431", sector: "marketing", rx: /(community manager|redes sociales|social media|instagram|linkedin|tiktok|facebook|comunidad)/ },
+  { occupation: "Diseñador/a gráfico/a", isco: "2166", sector: "marketing", rx: /(disenador grafico|diseñador grafico|diseñador gráfico|diseño grafico|diseño gráfico)/ },
+  { occupation: "Diseñador/a de moda", isco: "2163", sector: "manufactura", rx: /(disenador|diseñador|dieñador).{0,25}moda|patronaje|confeccion|confección|textil/ },
+  { occupation: "Dependiente/a de comercio", isco: "5220", sector: "comercial", rx: /(dependiente|dependienta|tienda|retail|venta en tienda|atencion en tienda)/ },
+  { occupation: "Operador/a atención al cliente", isco: "4222", sector: "servicio_cliente", rx: /(atencion al cliente|atención al cliente|call center|contact center|customer service|soporte cliente)/ },
+  { occupation: "Técnico/a de RRHH", isco: "2423", sector: "recursos_humanos", rx: /(recursos humanos|rrhh|seleccion|selección|nominas|nóminas)/ },
+  { occupation: "Técnico/a contable", isco: "3313", sector: "finanzas", rx: /(contable|contabilidad|finanzas|facturacion|facturación|tesoreria|tesorería)/ },
+  { occupation: "Auxiliar administrativo/a", isco: "4110", sector: "administrativo", rx: /(administrativo|administrativa|backoffice|gestion documental|gestión documental|oficina)/ },
+  { occupation: "Docente educación primaria/secundaria", isco: "2320", sector: "educacion", rx: /(docente|profesor|profesora|maestro|maestra|educacion|educación|formacion|formación)/ },
+  { occupation: "Enfermero/a", isco: "2221", sector: "sanidad", rx: /(enfermero|enfermera|enfermeria|enfermería)/ },
+  { occupation: "Médico/a medicina general", isco: "2211", sector: "sanidad", rx: /(medico|médico|medicina general)/ }
+];
 
-    const ROLE_RULES = [
-      { role: "Analista de datos", rx: /analista.*datos|data analyst|bi|power bi/i },
-      { role: "Tech Lead", rx: /tech lead|l[ií]der t[eé]cnico|responsable t[eé]cnico/i },
-      { role: "Product Manager Tech", rx: /product manager|producto digital|product owner/i },
-      { role: "Especialista en DevOps", rx: /devops|ci\/cd|cloud|aws|azure/i },
-      { role: "Estratega de Marketing", rx: /estrategia.*marketing|marketing manager|campañas|campana/i },
-      { role: "Content Director", rx: /contenido|contenidos|editorial|comunicaci[oó]n|copy/i },
-      { role: "Especialista en Marketing Digital", rx: /marketing digital|seo|sem|analytics|redes sociales/i },
-      { role: "Product Marketing Manager", rx: /product marketing|go to market|lanzamiento/i },
-      { role: "Analista de Procesos", rx: /procesos|mejora continua|automatizaci[oó]n de procesos/i },
-      { role: "Coordinador de Proyectos", rx: /coordinador.*proyecto|jefe.*proyecto|project manager|gesti[oó]n.*proyecto/i },
-      { role: "Especialista en CRM", rx: /crm|salesforce|hubspot|dynamics/i },
-      { role: "Asistente de Recursos Humanos", rx: /recursos humanos|rrhh|n[oó]minas|selecci[oó]n/i },
-      { role: "Analista de Riesgos", rx: /riesgo|riesgos|risk/i },
-      { role: "Especialista en Compliance", rx: /compliance|cumplimiento|regulatorio/i },
-      { role: "Asesor Financiero", rx: /asesor financiero|financiero|inversi[oó]n/i },
-      { role: "Data Scientist Financiero", rx: /data scientist.*financ|cient[ií]fico.*datos.*financ/i },
-      { role: "Especialista en Experiencia del Cliente", rx: /experiencia del cliente|customer experience|cx/i },
-      { role: "Account Manager", rx: /account manager|cuentas|cliente clave/i },
-      { role: "Training Manager", rx: /training manager|formaci[oó]n.*equipo|capacitaci[oó]n/i },
-      { role: "Community Manager", rx: /community manager|comunidad|redes sociales/i },
-      { role: "Supervisor de Calidad", rx: /calidad|qa industrial|supervisor.*calidad/i },
-      { role: "Ingeniero de Procesos", rx: /ingeniero.*procesos|proceso industrial/i },
-      { role: "Coordinador de Logística", rx: /log[ií]stica|almac[eé]n|transporte|supply/i },
-      { role: "Planificador de Producción", rx: /planificaci[oó]n.*producci[oó]n|planificador/i },
-      { role: "Diseñador Instructivo", rx: /diseñador instructivo|diseño instructivo|contenidos formativos/i },
-      { role: "Gestor de Aprendizaje", rx: /gestor.*aprendizaje|learning manager|lms/i },
-      { role: "Especialista en EdTech", rx: /edtech|tecnolog[ií]a educativa/i },
-      { role: "Coordinador de Formación Corporativa", rx: /formaci[oó]n corporativa|coordinador.*formaci[oó]n/i }
-    ];
+const SECTOR_KEYWORDS = {
+  manufactura: ["manufactura", "fabricacion", "fabrica", "produccion", "planta", "industrial", "calidad", "operaciones", "mantenimiento", "textil", "moda", "confeccion", "patronaje", "turnos", "cuadrante"],
+  logistica: ["logistica", "almacen", "transporte", "supply chain", "reparto", "mrw", "paqueteria"],
+  tecnologia: ["tecnologia", "it", "sistemas", "software", "programacion", "devops", "cloud", "ciberseguridad", "arquitectura", "desarrollo"],
+  marketing: ["marketing", "comunicacion", "branding", "publicidad", "contenidos", "redes sociales", "campanas", "seo", "sem", "social media"],
+  finanzas: ["banca", "finanzas", "financiero", "contabilidad", "auditoria", "seguros", "riesgo", "compliance", "tesoreria"],
+  servicio_cliente: ["atencion al cliente", "servicio al cliente", "call center", "contact center", "customer", "cx"],
+  educacion: ["educacion", "docencia", "profesor", "formacion", "capacitacion", "aprendizaje"],
+  administrativo: ["administrativo", "administracion", "backoffice", "oficina", "documentos", "gestion documental"],
+  recursos_humanos: ["recursos humanos", "rrhh", "nominas", "seleccion"],
+  sanidad: ["sanidad", "salud", "hospital", "clinica", "enfermeria", "medicina"],
+  comercial: ["ventas", "comercial", "vendedor", "dependiente", "tienda"]
+};
 
-    const state = {
-      currentStep: 0,
-      answers: {},
-      rawAnswers: [],
-      started: false,
-      sending: false
-    };
+const state = { currentStep: 0, answers: {}, rawAnswers: [], started: false, sending: false };
 
-    const chat = document.getElementById("nexo-carlos-chat");
-    const launcher = document.getElementById("nexo-carlos-launcher");
-    const closeBtn = document.getElementById("chat-close-btn");
-    const resetBtn = document.getElementById("chat-reset-btn");
-    const form = document.getElementById("chat-form");
-    const input = document.getElementById("chat-input-field");
-    const sendBtn = document.getElementById("chat-send-btn");
-    const messages = document.getElementById("chat-messages");
-    const progressBar = document.getElementById("progress-bar");
-    const stepIndicator = document.getElementById("step-indicator");
-    const prodToggle = document.getElementById("prod-toggle");
+const chat = document.getElementById("nexo-carlos-chat");
+const launcher = document.getElementById("nexo-carlos-launcher");
+const closeBtn = document.getElementById("chat-close-btn");
+const resetBtn = document.getElementById("chat-reset-btn");
+const form = document.getElementById("chat-form");
+const input = document.getElementById("chat-input-field");
+const sendBtn = document.getElementById("chat-send-btn");
+const messages = document.getElementById("chat-messages");
+const progressBar = document.getElementById("progress-bar");
+const stepIndicator = document.getElementById("step-indicator");
+const prodToggle = document.getElementById("prod-toggle");
 
-    launcher.addEventListener("click", openChat);
-    closeBtn.addEventListener("click", () => chat.classList.remove("is-open"));
-    resetBtn.addEventListener("click", resetConversation);
-    form.addEventListener("submit", handleSubmit);
+if (launcher) launcher.addEventListener("click", openChat);
+if (closeBtn) closeBtn.addEventListener("click", () => chat.classList.remove("is-open"));
+if (resetBtn) resetBtn.addEventListener("click", resetConversation);
+if (form) form.addEventListener("submit", handleSubmit);
 
-    input.addEventListener("input", () => {
-      input.style.height = "auto";
-      input.style.height = Math.min(input.scrollHeight, 116) + "px";
-    });
+input.addEventListener("input", () => {
+  input.style.height = "auto";
+  input.style.height = Math.min(input.scrollHeight, 116) + "px";
+});
+input.addEventListener("keydown", (event) => {
+  if (event.key === "Enter" && !event.shiftKey) {
+    event.preventDefault();
+    form.requestSubmit();
+  }
+});
 
-    input.addEventListener("keydown", (event) => {
-      if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();
-        form.requestSubmit();
-      }
-    });
+function normalizeText(value) {
+  return String(value ?? "").trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/\s+/g, " ");
+}
+function cleanText(value) { return String(value ?? "").trim().replace(/\s+/g, " "); }
+function removeQuickActions() { document.querySelectorAll("#chat-messages .quick-actions").forEach(el => el.remove()); }
+function scrollChatToBottom() { messages.scrollTop = messages.scrollHeight; }
 
-    function openChat() {
-      chat.classList.add("is-open");
-      if (!state.started) {
-        state.started = true;
-        setTimeout(() => askCurrentQuestion(), 180);
-      }
-      setTimeout(() => input.focus(), 200);
-    }
-
-    function resetConversation() {
-      state.currentStep = 0;
-      state.answers = {};
-      state.rawAnswers = [];
-      state.started = true;
-      state.sending = false;
-      messages.innerHTML = "";
-      input.value = "";
-      input.disabled = false;
-      sendBtn.disabled = false;
-      updateProgress();
-      askCurrentQuestion();
-    }
-
-    function addMessage(text, sender = "bot") {
-      const wrapper = document.createElement("div");
-      wrapper.className = `message ${sender}`;
-      const bubble = document.createElement("div");
-      bubble.className = "bubble";
-      bubble.textContent = text;
-      wrapper.appendChild(bubble);
-      messages.appendChild(wrapper);
-      messages.scrollTop = messages.scrollHeight;
-      return wrapper;
-    }
-
-    function addTyping() {
-      const wrapper = document.createElement("div");
-      wrapper.className = "message bot";
-      const bubble = document.createElement("div");
-      bubble.className = "bubble";
-      bubble.innerHTML = '<span class="typing"><span></span><span></span><span></span></span>';
-      wrapper.appendChild(bubble);
-      messages.appendChild(wrapper);
-      messages.scrollTop = messages.scrollHeight;
-      return wrapper;
-    }
-
-    function botSay(text, delay = 420) {
-      const typing = addTyping();
-      setTimeout(() => {
-        typing.remove();
-        addMessage(text, "bot");
-      }, delay);
-    }
-
-    function askCurrentQuestion() {
-      updateProgress();
-      const question = QUESTIONS[state.currentStep];
-      if (!question) return;
-      botSay(question.text);
-      renderQuickActions(question.id);
-    }
-
-    function renderQuickActions(questionId) {
-      const old = document.querySelector(".quick-actions");
-      if (old) old.remove();
-
-      const actionsByQuestion = {
-        p4: ["Sí, gestiono personas", "Gestiono proyectos", "No gestiono equipo"],
-        p5: ["Uso ChatGPT", "Uso Copilot", "No uso IA todavía"],
-        p6: ["Estoy trabajando", "Estoy en búsqueda", "3 horas/semana", "5 horas/semana"],
-        p7: ["Conocimiento del negocio", "Criterio técnico", "Relación con clientes", "Gestión de personas"]
-      };
-
-      const actions = actionsByQuestion[questionId];
-      if (!actions) return;
-
-      const container = document.createElement("div");
-      container.className = "quick-actions";
-      actions.forEach(label => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.textContent = label;
-        btn.addEventListener("click", () => {
-          input.value = input.value ? `${input.value}; ${label}` : label;
-          input.focus();
-        });
-        container.appendChild(btn);
-      });
-      messages.appendChild(container);
-      messages.scrollTop = messages.scrollHeight;
-    }
-
-    async function handleSubmit(event) {
-      event.preventDefault();
-      if (state.sending) return;
-
-      const value = input.value.trim();
-      if (!value) return;
-
-      const question = QUESTIONS[state.currentStep];
-      if (question?.expectsEmail && !isValidEmail(value)) {
-        addMessage(value, "user");
-        input.value = "";
-        botSay("Necesito una dirección de email válida para enviarte el informe. Por ejemplo: nombre@dominio.com. ¿Qué correo quieres usar?");
-        return;
-      }
-
-      addMessage(value, "user");
-      saveAnswer(question, value);
-      input.value = "";
-      input.style.height = "auto";
-
-      state.currentStep += 1;
-
-      if (state.currentStep < QUESTIONS.length) {
-        askCurrentQuestion();
-      } else {
-        await finishInterview();
-      }
-    }
-
-    function saveAnswer(question, value) {
-      state.answers[question.field] = value;
-      state.rawAnswers.push({
-        id: question.id,
-        field: question.field,
-        answer: value,
-        timestamp: new Date().toISOString()
-      });
-
-      if (question.id === "p2") {
-        const split = splitMechanicalAndCriteria(value);
-        state.answers.partes_mecanicas = split.mecanicas;
-        state.answers.partes_criterio = split.criterio;
-      }
-
-      if (question.id === "p3") {
-        state.answers.sector_empresa_ia = value;
-        state.answers.tipo_empresa = value;
-        state.answers.procesos_con_ia_o_cambios = value;
-      }
-
-      if (question.id === "p4") {
-        state.answers.anos_experiencia = extractYears(value);
-        state.answers.gestiona_equipo = /(gestiono|lidero|equipo|personas|a cargo|manager)/i.test(value);
-        state.answers.responsabilidad_resultados = /(proyecto|proyectos|kpi|objetivos|presupuesto|entregable|resultados|responsable)/i.test(value);
-      }
-
-      if (question.id === "p5") {
-        state.answers.herramientas_digitales = value;
-        state.answers.ia_usada = value;
-        state.answers.usa_ia_activamente = /(chatgpt|copilot|gemini|claude|ia|inteligencia artificial|automatizo|prompts)/i.test(value) && !/no uso ia|no he usado|no uso/i.test(value);
-      }
-
-      if (question.id === "p6") {
-        state.answers.estado_laboral = value;
-        state.answers.tiempo_formacion = extractLearningTime(value);
-      }
-
-      if (question.id === "p7") {
-        state.answers.especializacion_unica = /(negocio|criterio|t[eé]cnico|clientes|personas|decisiones|regulaci[oó]n|conocimiento|experiencia|relaci[oó]n)/i.test(value);
-      }
-    }
-
-    function splitMechanicalAndCriteria(text) {
-      const normalized = text.toLowerCase();
-      const parts = text.split(/criterio|personal|requieren|requiere|y las que/i);
-      if (parts.length >= 2) {
-        return {
-          mecanicas: parts[0].trim(),
-          criterio: parts.slice(1).join(" ").trim()
-        };
-      }
-      return { mecanicas: text, criterio: text };
-    }
-
-    function extractYears(text) {
-      const match = String(text).match(/(\d{1,2})(?:\s*años|\s*anos|\s*anios|\s*\+)?/i);
-      return match ? Number(match[1]) : 0;
-    }
-
-    function extractLearningTime(text) {
-      const match = String(text).match(/(\d{1,2})\s*(h|hora|horas)\s*(\/|a la)?\s*(semana|sem)?/i);
-      if (match) return `${match[1]} horas/semana`;
-      return text;
-    }
-
-    function inferSector(allText) {
-      for (const rule of SECTOR_RULES) {
-        if (rule.rx.test(allText)) return rule.sector;
-      }
-      return "";
-    }
-
-    function inferRole(allText) {
-      for (const rule of ROLE_RULES) {
-        if (rule.rx.test(allText)) return rule.role;
-      }
-      const firstLine = String(state.answers.tareas_principales || "").split(/[.,;\n]/)[0].trim();
-      return firstLine.length > 5 ? firstLine.slice(0, 80) : "";
-    }
-
-    function inferSkill(allText) {
-      const task = state.answers.tarea_mas_tiempo || state.answers.tareas_principales || allText;
-      return String(task).slice(0, 280);
-    }
-
-    function buildPayload() {
-      const allText = state.rawAnswers.map(item => item.answer).join(" \n ");
-      const sector = inferSector(allText);
-      const puesto = inferRole(allText);
-      const skill = inferSkill(allText);
-      const email = state.answers.email_destino || "";
-
-      return {
-        sector,
-        puesto,
-        skill,
-        anos_experiencia: Number(state.answers.anos_experiencia || extractYears(allText) || 0),
-        tiempo_formacion: state.answers.tiempo_formacion || extractLearningTime(allText) || "",
-        email_destino: email.trim().toLowerCase(),
-        gestiona_equipo: Boolean(state.answers.gestiona_equipo),
-        responsabilidad_resultados: Boolean(state.answers.responsabilidad_resultados),
-        especializacion_unica: Boolean(state.answers.especializacion_unica),
-        usa_ia_activamente: Boolean(state.answers.usa_ia_activamente),
-        estado_laboral: state.answers.estado_laboral || "",
-        tareas_principales: state.answers.tareas_principales || "",
-        tarea_mas_tiempo: state.answers.tarea_mas_tiempo || "",
-        partes_mecanicas: state.answers.partes_mecanicas || "",
-        partes_criterio: state.answers.partes_criterio || "",
-        herramientas_digitales: state.answers.herramientas_digitales || "",
-        ia_usada: state.answers.ia_usada || "",
-        tipo_empresa: state.answers.tipo_empresa || "",
-        procesos_con_ia_o_cambios: state.answers.procesos_con_ia_o_cambios || "",
-        entrevista_finalizada: true,
-        consentimiento_envio_informe: true,
-        origen: "chatbot_nexo_carlos",
-        chatbot_completed: true,
-        resumen_conversacion: allText,
-        conversation_history: state.rawAnswers,
-        carlos_avatar: {
-          nombre: "Carlos",
-          rol: "Orientador Profesional de nexo"
-        }
-      };
-    }
-
-    async function finishInterview() {
-      state.sending = true;
-      input.disabled = true;
-      sendBtn.disabled = true;
-      updateProgress(100);
-
-      const payload = buildPayload();
-      console.log("Payload normalizado enviado a n8n:", payload);
-
-      botSay("Listo. Estoy enviando la información para generar tu informe personalizado.", 250);
-
-      try {
-        const response = await fetch(getWebhookUrl(), {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-
-        let responseBody = null;
-        const text = await response.text();
-        try { responseBody = text ? JSON.parse(text) : null; } catch (_) { responseBody = text; }
-
-        if (!response.ok) {
-          throw new Error(`n8n respondió con estado ${response.status}: ${text}`);
-        }
-
-        botSay("Perfecto.\n\nMuchas gracias por interesarte en nexo.\n\nRecibirás un informe personalizado con:\n\n• Tu perfil profesional identificado.\n• Tu índice orientativo de evolución profesional.\n• Las habilidades que ya aportan valor.\n• Las habilidades recomendadas para reforzar tu ventaja profesional.\n• Una ruta de aprendizaje adaptada a tu disponibilidad.\n\nEsperamos volver a verte pronto.\n\nUn saludo,\n\nCarlos · Orientador Profesional de nexo", 520);
-        console.log("Respuesta n8n:", responseBody);
-      } catch (error) {
-        console.error(error);
-        state.sending = false;
-        input.disabled = false;
-        sendBtn.disabled = false;
-        addMessage("No he podido enviar el informe ahora mismo. Revisa la conexión, que el workflow esté activo y que estés usando la URL correcta de test o producción. Puedes intentarlo de nuevo enviando el último mensaje.", "bot");
-      }
-    }
-
-    function getWebhookUrl() {
-      return prodToggle.checked ? N8N_WEBHOOK_PROD : N8N_WEBHOOK_TEST;
-    }
-
-    function updateProgress(forcePercent = null) {
-      const percent = forcePercent !== null
-        ? forcePercent
-        : Math.round((state.currentStep / QUESTIONS.length) * 100);
-      progressBar.style.width = `${Math.min(100, percent)}%`;
-      const step = Math.min(state.currentStep + 1, QUESTIONS.length);
-      stepIndicator.textContent = `Pregunta ${step} de ${QUESTIONS.length}`;
-    }
-
-    function isValidEmail(email) {
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim());
-    }
-  </script>
-
-<script>
-  document.addEventListener('DOMContentLoaded', function () {
-    function openCarlosFromCTA(event) {
-      if (event) {
-        event.preventDefault();
-        event.stopPropagation();
-        if (typeof event.stopImmediatePropagation === 'function') event.stopImmediatePropagation();
-      }
-      if (typeof openChat === 'function') {
-        openChat();
-        return false;
-      }
-      const launcher = document.getElementById('nexo-carlos-launcher');
-      if (launcher) launcher.click();
-      return false;
-    }
-
-    document.querySelectorAll('#btn-nav,#btn-hero,.modal-trigger,.pricing-cta').forEach(function (el) {
-      el.addEventListener('click', openCarlosFromCTA, true);
-      el.setAttribute('aria-label', 'Abrir chat con Carlos');
-    });
-
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      a.addEventListener('click', function (event) {
-        const id = a.getAttribute('href');
-        if (!id || id === '#') return;
-        const target = document.querySelector(id);
-        if (target) {
-          event.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
+function openChat() {
+  chat.classList.add("is-open");
+  if (!state.started) {
+    state.started = true;
+    setTimeout(() => askCurrentQuestion(), 180);
+  }
+  setTimeout(() => input.focus(), 200);
+}
+function resetConversation() {
+  state.currentStep = 0;
+  state.answers = {};
+  state.rawAnswers = [];
+  state.started = true;
+  state.sending = false;
+  messages.innerHTML = "";
+  input.value = "";
+  input.disabled = false;
+  sendBtn.disabled = false;
+  updateProgress();
+  askCurrentQuestion();
+}
+function addMessage(text, sender = "bot") {
+  const wrapper = document.createElement("div");
+  wrapper.className = `message ${sender}`;
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.textContent = text;
+  wrapper.appendChild(bubble);
+  messages.appendChild(wrapper);
+  scrollChatToBottom();
+  return wrapper;
+}
+function addTyping() {
+  const wrapper = document.createElement("div");
+  wrapper.className = "message bot";
+  const bubble = document.createElement("div");
+  bubble.className = "bubble";
+  bubble.innerHTML = '<span class="typing"><span></span><span></span><span></span></span>';
+  wrapper.appendChild(bubble);
+  messages.appendChild(wrapper);
+  scrollChatToBottom();
+  return wrapper;
+}
+function botSay(text, delay = 420, callback = null) {
+  const typing = addTyping();
+  setTimeout(() => {
+    typing.remove();
+    const wrapper = addMessage(text, "bot");
+    if (typeof callback === "function") callback(wrapper);
+    scrollChatToBottom();
+  }, delay);
+}
+function askCurrentQuestion() {
+  removeQuickActions();
+  updateProgress();
+  const question = QUESTIONS[state.currentStep];
+  if (!question) return;
+  botSay(question.text, 420, (messageWrapper) => {
+    renderQuickActions(question.id, messageWrapper);
   });
-</script>
+}
+function renderQuickActions(questionId, messageWrapper) {
+  removeQuickActions();
+  const actionsByQuestion = {
+    p3: ["Manufactura / fabricación", "Logística / transporte", "Tecnología", "Servicios"],
+    p4: ["Sí, gestiono personas", "Gestiono proyectos", "No gestiono equipo"],
+    p5: ["Uso ChatGPT", "Uso Copilot", "No uso IA todavía"],
+    p6: ["Estoy trabajando", "Estoy en búsqueda", "3 horas/semana", "5 horas/semana"],
+    p7: ["Conocimiento del negocio", "Criterio técnico", "Relación con clientes", "Gestión de personas"]
+  };
+  const actions = actionsByQuestion[questionId];
+  if (!actions || !messageWrapper) return;
+  const container = document.createElement("div");
+  container.className = "quick-actions";
+  container.setAttribute("data-question-id", questionId);
+  actions.forEach(label => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.textContent = label;
+    btn.addEventListener("click", () => {
+      input.value = input.value ? `${input.value}; ${label}` : label;
+      input.focus();
+    });
+    container.appendChild(btn);
+  });
+  messageWrapper.insertAdjacentElement("afterend", container);
+  scrollChatToBottom();
+}
 
+function isOutOfScope(text) {
+  const t = normalizeText(text);
+  return /(me aburro|cuentame algo|cuentame un cuento|hazme un chiste|dime un chiste|que tal|quien gano|resultado del partido|tiempo hace|receta|pelicula|musica|cancion)/.test(t);
+}
+function outOfScopeReply(question) {
+  return "Lo siento, solo estoy entrenado para ayudarte con preguntas relacionadas con tu perfil profesional, habilidades y situación laboral. No puedo responder con fiabilidad a otro tipo de consultas. ¿Te parece si volvemos a intentarlo?\n\n" + question.text;
+}
+async function handleSubmit(event) {
+  event.preventDefault();
+  if (state.sending) return;
+  const value = input.value.trim();
+  if (!value) return;
+  const question = QUESTIONS[state.currentStep];
+
+  if (!question?.expectsEmail && isOutOfScope(value)) {
+    addMessage(value, "user");
+    input.value = "";
+    input.style.height = "auto";
+    botSay(outOfScopeReply(question));
+    return;
+  }
+  if (question?.expectsEmail && !isValidEmail(value)) {
+    addMessage(value, "user");
+    input.value = "";
+    botSay("Necesito una dirección de email válida para enviarte el informe. Por ejemplo: nombre@dominio.com. ¿Qué correo quieres usar?");
+    return;
+  }
+
+  removeQuickActions();
+  addMessage(value, "user");
+  saveAnswer(question, value);
+  input.value = "";
+  input.style.height = "auto";
+  state.currentStep += 1;
+  if (state.currentStep < QUESTIONS.length) askCurrentQuestion();
+  else await finishInterview();
+}
+
+function saveAnswer(question, value) {
+  state.answers[question.field] = value;
+  state.rawAnswers.push({ id: question.id, field: question.field, answer: value, timestamp: new Date().toISOString() });
+  if (question.id === "p2") {
+    const split = splitMechanicalAndCriteria(value);
+    state.answers.partes_mecanicas = split.mecanicas;
+    state.answers.partes_criterio = split.criterio;
+  }
+  if (question.id === "p3") {
+    state.answers.sector_empresa_ia = value;
+    state.answers.tipo_empresa = value;
+    state.answers.procesos_con_ia_o_cambios = value;
+    const years = extractYears(value);
+    if (years) state.answers.anos_experiencia = years;
+  }
+  if (question.id === "p4") {
+    const flags = detectManagement(value);
+    state.answers.gestiona_equipo = flags.gestionaEquipo;
+    state.answers.gestiona_proyectos = flags.gestionaProyectos;
+    state.answers.responsabilidad_resultados = flags.gestionaProyectos || /(kpi|objetivos|presupuesto|entregable|resultados|responsable)/i.test(value);
+    const years = extractYears(value);
+    if (years) state.answers.anos_experiencia = years;
+  }
+  if (question.id === "p5") {
+    state.answers.herramientas_digitales = value;
+    state.answers.ia_usada = value;
+    state.answers.usa_ia_activamente = detectActiveAI(value);
+    const years = extractYears(value);
+    if (years && !state.answers.anos_experiencia) state.answers.anos_experiencia = years;
+  }
+  if (question.id === "p6") {
+    state.answers.estado_laboral = value;
+    state.answers.tiempo_formacion = extractLearningTime(value);
+  }
+  if (question.id === "p7") {
+    state.answers.especializacion_unica = /(negocio|criterio|t[eé]cnico|clientes|personas|decisiones|regulaci[oó]n|conocimiento|experiencia|relaci[oó]n)/i.test(value);
+  }
+}
+function splitMechanicalAndCriteria(text) {
+  const parts = String(text).split(/criterio|personal|requieren|requiere|y las que/i);
+  if (parts.length >= 2) return { mecanicas: parts[0].trim(), criterio: parts.slice(1).join(" ").trim() };
+  return { mecanicas: text, criterio: text };
+}
+function extractYears(text) {
+  const raw = String(text ?? "");
+  const txt = normalizeText(raw);
+  let m = txt.match(/(?:llevo|tengo|son|hace|desde hace|mas de|más de|unos|unas|casi|aprox(?:imadamente)?\.?|alrededor de)?\s*(\d{1,2})\s*(?:anos|anios|años)/);
+  if (m) return Number(m[1]);
+  m = txt.match(/(?:llevo|tengo|mas de|unos|casi|desde hace)\s*(\d{1,2})\b/);
+  if (m) return Number(m[1]);
+  m = txt.match(/desde\s+(20\d{2}|19\d{2})/);
+  if (m) {
+    const y = new Date().getFullYear() - Number(m[1]);
+    return y > 0 && y < 60 ? y : 0;
+  }
+  m = txt.match(/\b(\d{1,2})\b/);
+  return m ? Number(m[1]) : 0;
+}
+function extractLearningTime(text) {
+  const txt = normalizeText(text);
+  const m = txt.match(/(\d{1,2})\s*(h|hora|horas)\s*(\/|a la|por)?\s*(semana|sem)?/);
+  if (m) return `${m[1]} horas/semana`;
+  return "";
+}
+function detectManagement(text) {
+  const t = normalizeText(text);
+  const negEquipo = /(no gestiono|no gestion|no lidero|sin equipo|no tengo equipo|no tengo personas|no hay personas a cargo|no tengo personal a cargo)/.test(t);
+  const gestionaEquipo = !negEquipo && /(gestiono|lidero|coordino|responsable de|jefe|jefa|manager|personas a cargo|equipo a cargo|personal a cargo)/.test(t);
+  const negProyecto = /(no gestiono proyectos|no llevo proyectos|sin proyectos)/.test(t);
+  const gestionaProyectos = !negProyecto && /(gestiono proyectos|gestion de proyectos|gestión de proyectos|coordino proyectos|project manager|jefe de proyecto|jefa de proyecto|responsable de proyectos)/.test(t);
+  return { gestionaEquipo, gestionaProyectos };
+}
+function detectActiveAI(text) {
+  const t = normalizeText(text);
+  if (/(no uso ia|no utilizo ia|no he usado ia|no uso inteligencia artificial|no utilizo inteligencia artificial|no uso chatgpt|no uso copilot|no uso copiloto)/.test(t)) return false;
+  return /(uso chatgpt|uso copilot|uso copiloto|chatgpt|copilot|copiloto|gemini|claude|ia generativa|inteligencia artificial|automatizo|prompts)/.test(t);
+}
+function sectorFromExplicitText(text) {
+  const t = normalizeText(text);
+  if (!t) return "";
+  if (/(manufactura|fabricacion|fabrica|produccion|industrial|planta|textil|moda|confeccion|operaciones)/.test(t)) return "manufactura";
+  if (/(logistica|almacen|transporte|supply chain|mrw|paqueteria)/.test(t)) return "logistica";
+  if (/(marketing|comunicacion|publicidad|redes sociales|seo|sem)/.test(t)) return "marketing";
+  if (/(finanzas|banca|contabilidad|seguros|tesoreria)/.test(t)) return "finanzas";
+  if (/(educacion|docencia|formacion|profesor)/.test(t)) return "educacion";
+  if (/(sanidad|salud|hospital|clinica|enfermeria|medicina)/.test(t)) return "sanidad";
+  if (/(tecnologia|\bit\b|sistemas|software|programacion|devops|cloud|ciberseguridad)/.test(t)) return "tecnologia";
+  if (/(administrativo|administracion|backoffice|oficina)/.test(t)) return "administrativo";
+  return "";
+}
+function inferSector(allText) {
+  const explicit = sectorFromExplicitText(state.answers.sector_empresa_ia || state.answers.tipo_empresa || "");
+  if (explicit) return explicit;
+  const occupation = inferOccupation(allText);
+  if (occupation.sector) return occupation.sector;
+  const t = normalizeText(allText);
+  const scores = {};
+  for (const [sector, words] of Object.entries(SECTOR_KEYWORDS)) {
+    scores[sector] = 0;
+    for (const word of words) if (t.includes(word)) scores[sector] += 1;
+  }
+  // herramientas de IA no clasifican sector tecnologia
+  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+  return sorted[0] && sorted[0][1] > 0 ? sorted[0][0] : "";
+}
+function inferOccupation(allText) {
+  const t = normalizeText(allText);
+  for (const rule of OCCUPATION_RULES) {
+    if (rule.rx.test(t)) return { occupation: rule.occupation, isco: rule.isco, sector: rule.sector };
+  }
+  const firstLine = cleanText(state.answers.tareas_principales || "").split(/[.,;\n]/)[0].trim();
+  return { occupation: firstLine.length > 5 ? firstLine.slice(0, 80) : "Ocupación pendiente de clasificación", isco: "", sector: "" };
+}
+function inferSkill(allText) {
+  const task = state.answers.tarea_mas_tiempo || state.answers.tareas_principales || allText;
+  return cleanText(task).slice(0, 280);
+}
+function buildPayload() {
+  const allText = state.rawAnswers.map(item => item.answer).join(" \n ");
+  const inferred = inferOccupation(allText);
+  const sector = inferSector(allText);
+  const skill = inferSkill(allText);
+  const email = state.answers.email_destino || "";
+  const years = Number(state.answers.anos_experiencia || extractYears(allText) || 0);
+  const payload = {
+    isco: inferred.isco || "",
+    ocupacion: inferred.occupation || "Ocupación pendiente de clasificación",
+    sector,
+    puesto: inferred.occupation || "Ocupación pendiente de clasificación",
+    skill,
+    habilidad: skill,
+    anos_experiencia: years,
+    "años_experiencia": years,
+    tiempo_formacion: state.answers.tiempo_formacion || extractLearningTime(allText) || "",
+    email_destino: email.trim().toLowerCase(),
+    gestiona_equipo: Boolean(state.answers.gestiona_equipo),
+    gestiona_proyectos: Boolean(state.answers.gestiona_proyectos),
+    responsabilidad_resultados: Boolean(state.answers.responsabilidad_resultados),
+    especializacion_unica: Boolean(state.answers.especializacion_unica),
+    usa_ia_activamente: Boolean(state.answers.usa_ia_activamente),
+    estado_laboral: state.answers.estado_laboral || "",
+    tareas_principales: state.answers.tareas_principales || "",
+    tarea_mas_tiempo: state.answers.tarea_mas_tiempo || "",
+    partes_mecanicas: state.answers.partes_mecanicas || "",
+    partes_criterio: state.answers.partes_criterio || "",
+    herramientas_digitales: state.answers.herramientas_digitales || "",
+    ia_usada: state.answers.ia_usada || "",
+    tipo_empresa: state.answers.tipo_empresa || "",
+    procesos_con_ia_o_cambios: state.answers.procesos_con_ia_o_cambios || "",
+    entrevista_finalizada: true,
+    consentimiento_envio_informe: true,
+    origen: "chatbot_nexo_carlos",
+    chatbot_completed: true,
+    resumen_conversacion: allText,
+    conversation_history: state.rawAnswers,
+    carlos_avatar: { nombre: "Carlos", rol: "Orientador Profesional de nexo" },
+    normalizacion_debug_front: {
+      sector_prioridad: state.answers.sector_empresa_ia ? "declarado_usuario" : "inferido",
+      ocupacion_detectada: inferred.occupation,
+      isco_detectado: inferred.isco,
+      longitud_allText: allText.length
+    }
+  };
+  return payload;
+}
+async function finishInterview() {
+  state.sending = true;
+  input.disabled = true;
+  sendBtn.disabled = true;
+  removeQuickActions();
+  updateProgress(100);
+  const payload = buildPayload();
+  console.log("Payload normalizado enviado a n8n:", payload);
+  botSay("Listo. Estoy enviando la información para generar tu informe personalizado.", 250);
+  try {
+    const response = await fetch(getWebhookUrl(), {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+    let responseBody = null;
+    const text = await response.text();
+    try { responseBody = text ? JSON.parse(text) : null; } catch (_) { responseBody = text; }
+    if (!response.ok) throw new Error(`n8n respondió con estado ${response.status}: ${text}`);
+    botSay("Perfecto.\n\nMuchas gracias por interesarte en nexo.\n\nRecibirás un informe personalizado con:\n\n• Tu perfil profesional identificado.\n• Tu índice orientativo de evolución profesional.\n• Las habilidades que ya aportan valor.\n• Las habilidades recomendadas para reforzar tu ventaja profesional.\n• Una ruta de aprendizaje adaptada a tu disponibilidad.\n\nEsperamos volver a verte pronto.\n\nUn saludo,\n\nCarlos · Orientador Profesional de nexo", 520);
+    console.log("Respuesta n8n:", responseBody);
+  } catch (error) {
+    console.error(error);
+    state.sending = false;
+    input.disabled = false;
+    sendBtn.disabled = false;
+    addMessage("No he podido enviar el informe ahora mismo. Revisa la conexión, que el workflow esté activo y que estés usando la URL correcta de test o producción. Puedes intentarlo de nuevo enviando el último mensaje.", "bot");
+  }
+}
+function getWebhookUrl() { return prodToggle.checked ? N8N_WEBHOOK_PROD : N8N_WEBHOOK_TEST; }
+function updateProgress(forcePercent = null) {
+  const percent = forcePercent !== null ? forcePercent : Math.round((state.currentStep / QUESTIONS.length) * 100);
+  progressBar.style.width = `${Math.min(100, percent)}%`;
+  const step = Math.min(state.currentStep + 1, QUESTIONS.length);
+  stepIndicator.textContent = `Pregunta ${step} de ${QUESTIONS.length}`;
+}
+function isValidEmail(email) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).trim()); }
+</script>
 </body>
 </html>
